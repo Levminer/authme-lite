@@ -40,10 +40,10 @@ module.exports = {
 	},
 	output: {
 		filename: "bundle.js",
-		path: path.resolve(__dirname, "resources"),
+		path: path.resolve(__dirname, "static"),
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "resources"),
+		contentBase: path.join(__dirname, "static"),
 		compress: true,
 		port: 8080,
 		hot: true,
