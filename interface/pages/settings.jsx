@@ -3,7 +3,7 @@ import KeepAlive from "react-activation"
 
 import { shell } from "@tauri-apps/api"
 
-import Appbar from "../components/appbar.jsx"
+import ClearData from "../components/clearData.jsx"
 
 const Settings = () => {
 	const openReleases = () => {
@@ -12,12 +12,16 @@ const Settings = () => {
 
 	return (
 		<>
-			<Appbar />
-
 			<KeepAlive>
 				<div className="conatiner flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 p-32 rounded-3xl flex flex-col justify-center items-center">
 						<h1 className="text-gray-50 text-6xl">Settings</h1>
+						<hr />
+						<div className="flex justify-center items-center flex-col">
+							<h1 className="text-4xl">Clear data</h1>
+							<h2 className="text-3xl mt-1">Clear all app data including settings and saved files.</h2>
+							<ClearData />
+						</div>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Version</h1>

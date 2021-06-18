@@ -6,7 +6,6 @@ import Appbar from "../components/appbar.jsx"
 const Advanced = () => {
 	return (
 		<>
-			<Appbar />
 			<KeepAlive>
 				<div className="conatiner flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 p-32 rounded-3xl flex flex-col justify-center items-center">

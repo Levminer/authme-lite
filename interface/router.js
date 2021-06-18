@@ -13,6 +13,7 @@ const Router = () => {
 		<>
 			<AliveScope>
 				<BrowserRouter>
+					<Appbar />
 					<Switch>
 						<Route exact path="/" component={Codes} />
 						<Route exact path="/advanced" component={Advanced} />

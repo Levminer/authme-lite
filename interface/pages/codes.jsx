@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
 
-import Appbar from "../components/appbar.jsx"
+let render = false
 
 const Codes = () => {
 	const speakeasy = require("@levminer/speakeasy")
@@ -15,13 +15,6 @@ const Codes = () => {
 
 		handlefiles(file.target.files)
 	}
-
-	let data = []
-	let save_text
-	const names = []
-	const secret = []
-	const issuer = []
-	const type = []
 
 	const handlefiles = (files) => {
 		// read file
@@ -231,16 +224,65 @@ const Codes = () => {
 				// add one to counter
 				counter++
 			}
-
-			clear = true
 		}
 
 		generate()
+
+		if (save === false) {
+			document.querySelector("#save").style.display = "block"
+		}
+	}
+
+	let names = []
+	let secret = []
+	let issuer = []
+	let data = []
+	let save_text
+	const type = []
+	let save = false
+
+	const loaded_names = JSON.parse(localStorage.getItem("name"))
+	const loaded_secret = JSON.parse(localStorage.getItem("secret"))
+	const loaded_issuer = JSON.parse(localStorage.getItem("issuer"))
+
+	useEffect(() => {
+		if (render === false) {
+			console.log("Authme - Page loaded")
+
+			setTimeout(() => {
+				loadSavedCodes()
+			}, 100)
+
+			render = true
+		}
+	}, [])
+
+	const saveCodes = () => {
+		localStorage.setItem("name", JSON.stringify(names))
+		localStorage.setItem("secret", JSON.stringify(secret))
+		localStorage.setItem("issuer", JSON.stringify(issuer))
+
+		document.querySelector("#save").style.display = "none"
+	}
+
+	const loadSavedCodes = () => {
+		if (loaded_names !== undefined && loaded_names !== null) {
+			console.log("Authme - Save found")
+
+			names = loaded_names
+			secret = loaded_secret
+			issuer = loaded_issuer
+
+			save = true
+
+			go()
+		} else {
+			console.warn("Authme - No save found")
+		}
 	}
 
 	return (
 		<>
-			<Appbar />
 			<KeepAlive>
 				<div className="conatiner flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 p-32 rounded-3xl flex flex-col justify-center items-center">
@@ -249,6 +291,10 @@ const Codes = () => {
 							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".txt" />
 							<button type="button" className="button m-5" id="input" onClick={openDialog}>
 								Choose a file
+							</button>
+
+							<button type="button" className="button m-5 hidden" id="save" onClick={saveCodes}>
+								Save codes
 							</button>
 						</div>
 
