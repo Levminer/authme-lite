@@ -1,0 +1,41 @@
+name: "Release"
+on:
+    push:
+        branches: [main, dev]
+    pull_request:
+        branches: [main, dev]
+
+jobs:
+    publish-tauri:
+        strategy:
+            fail-fast: false
+            matrix:
+                platform: [macos-latest, ubuntu-latest, windows-latest]
+
+        runs-on: ${{ matrix.platform }}
+        steps:
+            - uses: actions/checkout@v2
+            - name: setup node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+            - name: install Rust stable
+              uses: actions-rs/toolchain@v1
+              with:
+                  toolchain: stable
+            - name: install webkit2gtk (ubuntu only)
+              if: matrix.platform == 'ubuntu-latest'
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y webkit2gtk-4.0
+            - name: install app dependencies and build it
+              run: npm ci && npm run build
+            - uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tagName: __VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+                  releaseName: "Authme Lite __VERSION__"
+                  body: "### Authme Lite __VERSION__"
+                  draft: true
+                  prerelease: false
