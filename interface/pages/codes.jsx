@@ -3,6 +3,14 @@ import KeepAlive from "react-activation"
 
 let render = false
 
+let names = []
+let secret = []
+let issuer = []
+let data = []
+let save_text
+const type = []
+let save = false
+
 const Codes = () => {
 	const speakeasy = require("@levminer/speakeasy")
 
@@ -232,14 +240,6 @@ const Codes = () => {
 			document.querySelector("#save").style.display = "block"
 		}
 	}
-
-	let names = []
-	let secret = []
-	let issuer = []
-	let data = []
-	let save_text
-	const type = []
-	let save = false
 
 	const loaded_names = JSON.parse(localStorage.getItem("name"))
 	const loaded_secret = JSON.parse(localStorage.getItem("secret"))
