@@ -36,6 +36,6 @@ jobs:
               with:
                   tagName: __VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
                   releaseName: "Authme Lite __VERSION__"
-                  body: "### Authme Lite __VERSION__"
-                  draft: true
+                  releaseBody: "### Authme Lite __VERSION__"
+                  releaseDraft: true
                   prerelease: false
