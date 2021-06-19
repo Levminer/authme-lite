@@ -1,6 +1,6 @@
 {
 	"name": "authme-lite",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "A lite and simple version of Authme the 2FA app for desktop.",
 	"author": "Levminer",
 	"license": "GPL-3.0",
