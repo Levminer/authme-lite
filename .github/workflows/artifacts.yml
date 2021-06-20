@@ -31,10 +31,10 @@ jobs:
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - name: Remove bundle folder
+            - name: Remove build folder
               uses: JesseTG/rm@v1.0.2
               with:
-                  path: src-tauri/target/release/bundle
+                  path: src-tauri/target/release/build
             - name: Remove deps folder
               uses: JesseTG/rm@v1.0.2
               with:
