@@ -1,12 +1,10 @@
-name: "Release"
+name: "Artifacts"
 on:
     push:
-        branches: [main, dev]
-    pull_request:
-        branches: [main, dev]
+        branches: [dev]
 
 jobs:
-    publish-tauri:
+    test-tauri:
         strategy:
             fail-fast: false
             matrix:
@@ -33,9 +31,16 @@ jobs:
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Remove bundle folder
+              uses: JesseTG/rm@v1.0.2
               with:
-                  tagName: __VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-                  releaseName: "Authme Lite __VERSION__"
-                  releaseBody: "### Authme Lite __VERSION__"
-                  releaseDraft: true
-                  prerelease: false
+                  path: src-tauri/target/release/bundle
+            - name: Remove deps folder
+              uses: JesseTG/rm@v1.0.2
+              with:
+                  path: src-tauri/target/release/deps
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                  name: authme-lite-latest-${{ matrix.platform }}-x64-installer-portable
+                  path: src-tauri/target/release
