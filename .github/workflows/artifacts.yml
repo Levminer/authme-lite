@@ -2,7 +2,6 @@ name: "Artifacts"
 on:
     push:
         branches: [dev]
-
 jobs:
     test-tauri:
         strategy:
@@ -16,7 +15,7 @@ jobs:
                     - os: windows-latest
                       NAME: windows
 
-        runs-on: ${{ matrix.platform }}
+        runs-on: ${{ matrix.os}}
         steps:
             - uses: actions/checkout@v2
             - name: setup node
