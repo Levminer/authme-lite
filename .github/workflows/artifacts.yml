@@ -8,7 +8,13 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                platform: [macos-latest, ubuntu-latest, windows-latest]
+                    include:
+                    - os: macos-latest
+                      NAME: mac
+                    - os: ubuntu-latest
+                      NAME: linux
+                    - os: windows-latest
+                      NAME: windows
 
         runs-on: ${{ matrix.platform }}
         steps:
@@ -42,5 +48,5 @@ jobs:
             - name: Upload Artifacts
               uses: actions/upload-artifact@v2
               with:
-                  name: authme-lite-latest-${{ matrix.platform }}-x64-installer-portable
+                  name: authme-lite-latest-${{matrix.NAME}}-x64-installer-portable
                   path: src-tauri/target/release
