@@ -1,12 +1,16 @@
 {
 	"name": "authme-lite",
 	"version": "0.2.0",
+	"tag": "0.2.0",
+	"release": "2010. June 25.",
 	"description": "A lite and simple version of Authme the 2FA app for desktop.",
 	"author": "Levminer",
 	"license": "GPL-3.0",
 	"scripts": {
 		"start": "tauri dev",
 		"build": "tauri build",
+		"build:alpha": "node scripts/alpha-build.js && tauri build",
+		"build:release": "node scripts/release-build.js && tauri build",
 		"build:bundle": "cross-env NODE_ENV=production webpack --config .webpackrc.js",
 		"server": "cross-env NODE_ENV=development webpack serve --config .webpackrc.js",
 		"lint": "eslint --fix .",
