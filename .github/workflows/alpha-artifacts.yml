@@ -17,20 +17,20 @@ jobs:
         runs-on: ${{ matrix.os}}
         steps:
             - uses: actions/checkout@v2
-            - name: setup node
+            - name: Setup node
               uses: actions/setup-node@v1
               with:
                   node-version: 15
-            - name: install Rust stable
+            - name: Install rust stable
               uses: actions-rs/toolchain@v1
               with:
                   toolchain: stable
-            - name: install webkit2gtk (ubuntu only)
+            - name: Install webkit2gtk (ubuntu only)
               if: matrix.NAME == 'linux'
               run: |
                   sudo apt-get update
                   sudo apt-get install -y webkit2gtk-4.0
-            - name: install app dependencies and build it
+            - name: Install app dependencies and build it
               run: npm ci && npm run build:alpha
             - uses: tauri-apps/tauri-action@v0
               env:
@@ -43,7 +43,7 @@ jobs:
               uses: JesseTG/rm@v1.0.2
               with:
                   path: src-tauri/target/release/deps
-            - name: Upload Artifacts
+            - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
                   name: authme-lite-latest-alpha-${{matrix.NAME}}-x64-installer-portable

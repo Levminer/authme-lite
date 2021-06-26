@@ -14,18 +14,18 @@ const Settings = () => {
 		<>
 			<KeepAlive>
 				<div className="conatiner flex flex-col justify-center items-center mb-32">
-					<div className="mt-52 bg-gray-700 p-32 rounded-3xl flex flex-col justify-center items-center">
+					<div className="mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center box">
 						<h1 className="text-gray-50 text-6xl">Settings</h1>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Clear data</h1>
-							<h2 className="text-3xl mt-1">Clear all app data including settings and saved files.</h2>
+							<h2 className="text-2xl mt-1">Clear all app data including settings and saved files.</h2>
 							<ClearData />
 						</div>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Version</h1>
-							<h2 className="text-3xl mt-1">0.1.0 (2021. June 16.)</h2>
+							<h2 className="text-2xl mt-1">0.1.0 (2021. June 16.)</h2>
 							<button className="button" onClick={openReleases}>
 								Release notes
 							</button>

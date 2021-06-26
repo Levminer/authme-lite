@@ -140,7 +140,7 @@ const Codes = () => {
 				<p class="texts" id="time${counter}">Time</p>
 				</div>
 				<div class="div4">
-				<button class="button text-center" id="copy${counter}">Copy</button>
+				<button class="button copy text-center" id="copy${counter}">Copy</button>
 				</div>
 				</div>
 				`
@@ -285,7 +285,7 @@ const Codes = () => {
 		<>
 			<KeepAlive>
 				<div className="conatiner flex flex-col justify-center items-center mb-32">
-					<div className="mt-52 bg-gray-700 p-32 rounded-3xl flex flex-col justify-center items-center">
+					<div className="mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center box">
 						<h1 className="text-gray-50 text-6xl">Codes</h1>
 						<div className="mx-a">
 							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".txt" />
