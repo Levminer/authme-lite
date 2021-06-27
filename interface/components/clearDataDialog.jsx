@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
 
-const ClearData = () => {
+const ClearDataDialog = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const closeModal = () => {
@@ -64,7 +64,7 @@ const ClearData = () => {
 									Clear data
 								</Dialog.Title>
 								<div className="mt-2">
-									<p className="text-xl text-gray-50 flex justify-center">
+									<p className="text-xl text-gray-50 flex justify-center text-center">
 										Are you sure you want to clear all data? <br /> This can not be undone!
 									</p>
 								</div>
@@ -91,4 +91,4 @@ const ClearData = () => {
 	)
 }
 
-export default ClearData
+export default ClearDataDialog

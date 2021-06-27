@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const Appbar = () => {
+const AppBar = () => {
 	return (
 		<>
 			<header className="text-gray-50 bg-gray-900 sticky top-0 z-50">
@@ -82,4 +82,4 @@ const Appbar = () => {
 	)
 }
 
-export default Appbar
+export default AppBar

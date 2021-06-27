@@ -76,7 +76,7 @@ const Advanced = () => {
 									str += substr
 								}
 								const blob = new Blob([str], { type: "text/plain;charset=utf-8" })
-								FileSaver.saveAs(blob, "authme_web_import.txt")
+								FileSaver.saveAs(blob, "authme_lite_import.txt")
 							}, 500)
 						}
 					} else {
@@ -87,6 +87,20 @@ const Advanced = () => {
 			}
 			process_images()
 		}
+	}
+
+	const downloadAlert = () => {
+		const FileSaver = require("file-saver")
+		const names = JSON.parse(localStorage.getItem("name"))
+		const secrets = JSON.parse(localStorage.getItem("secret"))
+		const issuers = JSON.parse(localStorage.getItem("issuer"))
+		let str = ""
+		for (let i = 0; i < names.length; i++) {
+			const substr = `\nName:   ${names[i].trim()} \nSecret: ${secrets[i].trim()} \nIssuer: ${issuers[i].trim()} \nType:   OTP_TOTP\n`
+			str += substr
+		}
+		const blob = new Blob([str], { type: "text/plain;charset=utf-8" })
+		FileSaver.saveAs(blob, "authme_lite_export.txt")
 	}
 
 	return (
@@ -108,14 +122,16 @@ const Advanced = () => {
 							<h3 className="text-2xl mt-1">You can import from QR code(s) here.</h3>
 							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".jpg, .jpeg, .png, .bmp" multiple />
 							<button type="button" className="button m-5" id="input" onClick={openDialog}>
-								Choose a file (WIP)
+								Import QR code(s)
 							</button>
 						</div>
 
 						<div className="exportMenu mt-3 hidden flex-col justify-center items-center">
 							<h2 className="text-4xl mt-5">Export</h2>
 							<h3 className="text-2xl mt-1">You can export your QR code(s) if you saved them.</h3>
-							<button className="button">Export QR code(s) (Coming soon)</button>
+							<button className="button m-5" onClick={downloadAlert}>
+								Export QR code(s)
+							</button>
 						</div>
 					</div>
 				</div>
