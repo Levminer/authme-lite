@@ -1,10 +1,10 @@
 {
 	"package": {
 		"productName": "Authme Lite",
-		"version": "0.1.0"
+		"version": "0.2.0"
 	},
 	"build": {
-		"distDir": "../resources",
+		"distDir": "../static",
 		"devPath": "http://localhost:8080",
 		"beforeDevCommand": "npm run build:bundle",
 		"beforeBuildCommand": "npm run build:bundle"

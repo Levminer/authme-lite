@@ -6,13 +6,14 @@ import Codes from "./pages/codes.jsx"
 import Advanced from "./pages/advanced.jsx"
 import Settings from "./pages/settings.jsx"
 
-import Appbar from "./components/appbar.jsx"
+import AppBar from "./components/appBar.jsx"
 
 const Router = () => {
 	return (
 		<>
 			<AliveScope>
 				<BrowserRouter>
+					<AppBar />
 					<Switch>
 						<Route exact path="/" component={Codes} />
 						<Route exact path="/advanced" component={Advanced} />

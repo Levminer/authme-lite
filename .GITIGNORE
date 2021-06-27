@@ -3,3 +3,4 @@ bundle.js
 target
 WixTools
 *.txt
+build.json
