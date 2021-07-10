@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
 
-const ClearDataDialog = () => {
+const ClearDataDialog = (props) => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const closeModal = () => {
@@ -27,7 +28,7 @@ const ClearDataDialog = () => {
 		<>
 			<div className="inset-0 flex items-center justify-center">
 				<button type="button" onClick={openModal} className="button">
-					Clear data
+					{props.name}
 				</button>
 			</div>
 
@@ -46,7 +47,6 @@ const ClearDataDialog = () => {
 							<Dialog.Overlay className="fixed inset-0" />
 						</Transition.Child>
 
-						{/* This element is to trick the browser into centering the modal contents. */}
 						<span className="inline-block h-screen align-middle" aria-hidden="true">
 							&#8203;
 						</span>
@@ -61,24 +61,22 @@ const ClearDataDialog = () => {
 						>
 							<div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-gray-600 shadow-xl rounded-2xl">
 								<Dialog.Title as="h3" className="text-4xl font-medium leading-6 text-gray-50 flex justify-center">
-									Clear data
+									{props.name}
 								</Dialog.Title>
 								<div className="mt-2">
-									<p className="text-xl text-gray-50 flex justify-center text-center">
-										Are you sure you want to clear all data? <br /> This can not be undone!
-									</p>
+									<p className="text-xl text-gray-50 flex justify-center text-center">{props.text}</p>
 								</div>
 
 								<div className="flex flex-row gap-3 justify-center">
 									<div className="">
 										<button type="button" className="button" onClick={clearData}>
-											Confirm
+											{props.button0}
 										</button>
 									</div>
 
 									<div className="">
 										<button type="button" className="button" onClick={closeModal}>
-											Cancel
+											{props.button1}
 										</button>
 									</div>
 								</div>
