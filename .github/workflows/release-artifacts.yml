@@ -46,5 +46,5 @@ jobs:
             - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
-                  name: authme-lite-latest-alpha-${{matrix.NAME}}-x64-installer-portable
+                  name: authme-lite-latest-release-${{matrix.NAME}}-x64-installer-portable
                   path: src-tauri/target/release

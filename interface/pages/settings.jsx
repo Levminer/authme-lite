@@ -20,12 +20,17 @@ const Settings = () => {
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Clear data</h1>
 							<h2 className="text-2xl mt-1">Clear all app data including settings and saved files.</h2>
-							<ClearDataDialog />
+							<ClearDataDialog
+								name="Clear data"
+								text="Are you sure you want to clear all data? This can not be undone!"
+								button0="Confirm"
+								button1="Cancel"
+							/>
 						</div>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Version</h1>
-							<h2 className="text-2xl mt-1">0.2.0 (2021. June 27.)</h2>
+							<h2 className="text-2xl mt-1">0.3.0 (2021. July 10.)</h2>
 							<button className="button" onClick={openReleases}>
 								Release notes
 							</button>
