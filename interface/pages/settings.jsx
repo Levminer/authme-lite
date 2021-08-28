@@ -1,13 +1,29 @@
 import React from "react"
 import KeepAlive from "react-activation"
 
-import { shell } from "@tauri-apps/api"
+import { app } from "@tauri-apps/api"
+import { invoke } from "@tauri-apps/api/tauri"
 
-import ClearDataDialog from "../components/clearDataDialog.jsx"
+import { number, date } from "../../build.json"
 
 const Settings = () => {
-	const openReleases = () => {
-		shell.open("https://github.com/Levminer/authme-lite/releases")
+	const clear = async () => {
+		const message = await invoke("clear_data")
+
+		if (message === "true") {
+			localStorage.clear()
+			location.reload()
+			location.replace("/")
+		}
+	}
+
+	const about = async () => {
+		const authme = await app.getVersion()
+		const tauri = await app.getTauriVersion()
+
+		const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nRelease date: ${date}\nBuild number: ${number}\n\nCreated by: Lőrik Levente`
+
+		invoke("about", { invokeMessage: message })
 	}
 
 	return (
@@ -20,19 +36,16 @@ const Settings = () => {
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Clear data</h1>
 							<h2 className="text-2xl mt-1">Clear all app data including settings and saved files.</h2>
-							<ClearDataDialog
-								name="Clear data"
-								text="Are you sure you want to clear all data? This can not be undone!"
-								button0="Confirm"
-								button1="Cancel"
-							/>
+							<button className="button" onClick={clear}>
+								Clear data
+							</button>
 						</div>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Version</h1>
 							<h2 className="text-2xl mt-1">0.3.0 (2021. July 10.)</h2>
-							<button className="button" onClick={openReleases}>
-								Release notes
+							<button className="button" onClick={about}>
+								About
 							</button>
 						</div>
 					</div>
