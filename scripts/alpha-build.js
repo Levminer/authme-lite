@@ -1,15 +1,7 @@
 const fs = require("fs")
 const { version } = require("../package.json")
 
-const build = new Date()
-	.toISOString()
-	.replace("T", "X")
-	.replaceAll(":", ".")
-	.substring(0, 19)
-	.replaceAll("-", ".")
-	.slice(2)
-	.replaceAll(".", "")
-	.replace("X", ".")
+const build = new Date().toISOString().replace("T", "X").replaceAll(":", ".").substring(0, 19).replaceAll("-", ".").slice(2).replaceAll(".", "").replace("X", ".")
 
 const date = new Date()
 
@@ -26,13 +18,13 @@ const file = {
 }
 
 if (!fs.existsSync("src-tauri/target/release")) {
-	fs.mkdirSync("src-tauri/target/release")
+	fs.mkdirSync("src-tauri/target/release", { recursive: true })
 }
 
 fs.writeFileSync("build.json", JSON.stringify(file, null, "\t"))
 fs.writeFileSync("src-tauri/target/release/build.json", JSON.stringify(file, null, "\t"))
 
-const conf = JSON.parse(fs.readFileSync("./src-tauri/tauri.conf.json", "utf-8"))
+const conf = JSON.parse(fs.readFileSync("src-tauri/tauri.conf.json", "utf-8"))
 conf.package.version = version
 
-fs.writeFileSync("./src-tauri/tauri.conf.json", JSON.stringify(conf, null, "\t"))
+fs.writeFileSync("src-tauri/tauri.conf.json", JSON.stringify(conf, null, "\t"))
