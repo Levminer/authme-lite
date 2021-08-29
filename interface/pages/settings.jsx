@@ -21,10 +21,20 @@ const Settings = () => {
 		const authme = await app.getVersion()
 		const tauri = await app.getTauriVersion()
 
+		document.querySelector(".ver").textContent = `${authme} (${date})`
+
 		const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nRelease date: ${date}\nBuild number: ${number}\n\nCreated by: Lőrik Levente`
 
 		invoke("about", { invokeMessage: message })
 	}
+
+	const version = async () => {
+		const authme = await app.getVersion()
+
+		document.querySelector(".ver").textContent = `${authme} (${date})`
+	}
+
+	version()
 
 	return (
 		<>
@@ -43,7 +53,7 @@ const Settings = () => {
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Version</h1>
-							<h2 className="text-2xl mt-1">0.3.0 (2021. July 10.)</h2>
+							<h2 className="text-2xl mt-1 ver"></h2>
 							<button className="button" onClick={about}>
 								About
 							</button>
