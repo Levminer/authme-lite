@@ -25,8 +25,8 @@ const file = {
 	date: release_date,
 }
 
-if (!fs.existsSync("dist")) {
-	fs.mkdirSync("dist")
+if (!fs.existsSync("src-tauri/target/release")) {
+	fs.mkdirSync("src-tauri/target/release")
 }
 
 fs.writeFileSync("build.json", JSON.stringify(file, null, "\t"))
