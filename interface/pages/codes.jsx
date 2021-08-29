@@ -132,7 +132,7 @@ const Codes = () => {
 				<p class="texts" id="name${counter}">Name</p>
 				</div>
 				<div class="div2 flex flex-col justify-center">
-				<h3 class="header mx-auto">Code</h3>
+				<h3 class="header mx-auto mt-4">Code</h3>
 				<input type="text" class="input" id="code${counter}" readonly/>
 				</div>
 				<div class="div3 flex flex-col justify-center">

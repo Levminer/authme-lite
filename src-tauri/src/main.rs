@@ -3,8 +3,17 @@
   windows_subsystem = "windows"
 )]
 
+mod about;
+mod error;
+mod clear_data;
+
 fn main() {
   tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![
+      clear_data::clear_data,
+      about::about,
+      error::error
+    ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }

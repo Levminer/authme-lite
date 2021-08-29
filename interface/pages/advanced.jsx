@@ -1,6 +1,7 @@
 import React from "react"
 import KeepAlive from "react-activation"
 import QrcodeDecoder from "qrcode-decoder"
+import { invoke } from "@tauri-apps/api/tauri"
 
 const Advanced = () => {
 	const importMenu = () => {
@@ -30,8 +31,6 @@ const Advanced = () => {
 	}
 
 	const createCodes = (event) => {
-		console.log(event)
-
 		const FileSaver = require("file-saver")
 		const arr = event.target.files
 		const names = []
@@ -47,7 +46,7 @@ const Advanced = () => {
 				qr.decodeFromImage(image).then((res) => {
 					if (res === false) {
 						// no qr code
-						alert("No QR code(s) found!")
+						return invoke("error", { invokeMessage: "No QR code(s) found on the picture!\n\nPlease try again with another picture!" })
 					} else if (res.data.startsWith("otpauth://totp/")) {
 						// construct
 						let url = res.data.replaceAll(/\s/g, "")
@@ -70,9 +69,7 @@ const Advanced = () => {
 							setTimeout(() => {
 								let str = ""
 								for (let j = 0; j < names.length; j++) {
-									const substr = `\nName:   ${names[j].trim()} \nSecret: ${secrets[j].trim()} \nIssuer: ${issuers[
-										j
-									].trim()} \nType:   OTP_TOTP\n`
+									const substr = `\nName:   ${names[j].trim()} \nSecret: ${secrets[j].trim()} \nIssuer: ${issuers[j].trim()} \nType:   OTP_TOTP\n`
 									str += substr
 								}
 								const blob = new Blob([str], { type: "text/plain;charset=utf-8" })
@@ -81,7 +78,7 @@ const Advanced = () => {
 						}
 					} else {
 						// no qr code
-						alert("No QR code(s) found!")
+						return invoke("error", { invokeMessage: "No QR code(s) found on the picture!\n\nPlease try again with another picture!" })
 					}
 				})
 			}
@@ -91,9 +88,17 @@ const Advanced = () => {
 
 	const downloadAlert = () => {
 		const FileSaver = require("file-saver")
+
 		const names = JSON.parse(localStorage.getItem("name"))
 		const secrets = JSON.parse(localStorage.getItem("secret"))
 		const issuers = JSON.parse(localStorage.getItem("issuer"))
+
+		if (names === null) {
+			return invoke("error", { invokeMessage: "No save file found!\n\nGo back to the codes page and save your codes!" })
+		}
+
+		console.log(names)
+
 		let str = ""
 		for (let i = 0; i < names.length; i++) {
 			const substr = `\nName:   ${names[i].trim()} \nSecret: ${secrets[i].trim()} \nIssuer: ${issuers[i].trim()} \nType:   OTP_TOTP\n`

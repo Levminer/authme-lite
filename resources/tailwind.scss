@@ -50,6 +50,7 @@ body {
 	color: white;
 	background-color: rgb(10, 10, 10);
 	overflow-y: scroll !important;
+	user-select: none;
 }
 
 * {
@@ -108,7 +109,7 @@ body {
 }
 
 .texts {
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 hr {
