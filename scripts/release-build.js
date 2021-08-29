@@ -30,7 +30,7 @@ if (!fs.existsSync("dist")) {
 }
 
 fs.writeFileSync("build.json", JSON.stringify(file, null, "\t"))
-fs.writeFileSync("dist/build.json", JSON.stringify(file, null, "\t"))
+fs.writeFileSync("src-tauri/target/release/build.json", JSON.stringify(file, null, "\t"))
 
 const conf = JSON.parse(fs.readFileSync("./src-tauri/tauri.conf.json", "utf-8"))
 conf.package.version = version
