@@ -127,15 +127,15 @@ const Codes = () => {
 				// set div elements
 				element.innerHTML = `
 							<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
-							<div class=" flex flex-col flex-1 justify-center items-center lg:ml-10">
-							<h1 class="text-3xl font-bold">Name</h1>
+							<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
+							<h1 class="text-3xl font-bold md:mt-3">Name</h1>
 							<h2 id="name${i}" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 							</div>
-							<div class=" flex flex-col flex-1 justify-center items-center">
+							<div class="flex flex-col flex-1 justify-center items-center">
 							<h1 class="text-3xl font-bold md:mt-3">Time</h1>
 							<h2 id="time${i}" class="w-20 text-center text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
 							</div>
-							<div class=" flex flex-col flex-1 justify-center items-center lg:mr-10">
+							<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
 							<h1 class="text-3xl font-bold md:mt-3">Code</h1>
 							<h2 id="code${i}" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 							</div>
@@ -297,43 +297,6 @@ const Codes = () => {
 								Save codes
 							</button>
 						</div>
-
-						{/* test */}
-						<div className="hidden container w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl">
-							<div className="flex flex-row mt-8 mb-14">
-								<div className=" flex flex-col flex-1 justify-center items-center ml-10">
-									<h1 className="text-3xl font-bold">Name</h1>
-									<h2 id="name" className="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all">
-										Google
-									</h2>
-								</div>
-								<div className=" flex flex-col flex-1 justify-center items-center">
-									<h1 className="text-3xl font-bold">Time</h1>
-									<h2 id="time" className="w-20 text-center text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600">
-										15
-									</h2>
-								</div>
-								<div className=" flex flex-col flex-1 justify-center items-center mr-10">
-									<h1 className="text-3xl font-bold">Code</h1>
-									<h2 id="code" className="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all">
-										123456
-									</h2>
-								</div>
-							</div>
-							<div className="flex flex-col justify-center items-center">
-								<div className="progress">
-									<div className="progress__fill"></div>
-									<span className="progress__text">0%</span>
-								</div>
-								<button className="w-40 flex flex-row mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform">
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative top-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-									</svg>
-									Copy
-								</button>
-							</div>
-						</div>
-						{/* end */}
 					</div>
 				</div>
 			</KeepAlive>
