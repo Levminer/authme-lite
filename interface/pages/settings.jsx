@@ -35,7 +35,7 @@ const Settings = () => {
 			.replace(/ +(?= )/g, "")
 		const memory = `${Math.round(hardware[1] / 1024 / 1024)}GB`
 
-		const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nOS version: ${os_type} ${os_arch} ${os_version}\nHardware info: ${cpu}${memory} RAM\n\nRelease date: ${date}\nBuild number: ${number}\n\nCreated by: Lőrik Levente`
+		const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nOS version: ${os_type} ${os_arch.replace("x86_64", "x64")} ${os_version}\nHardware info: ${cpu}${memory} RAM\n\nRelease date: ${date}\nBuild number: ${number}\n\nCreated by: Lőrik Levente`
 
 		invoke("about", { invokeMessage: message })
 	}
@@ -61,7 +61,7 @@ const Settings = () => {
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h1 className="text-4xl">Clear data</h1>
-							<h2 className="text-2xl mt-1">Clear all app data including settings and saved codes.</h2>
+							<h2 className="text-2xl mt-1 text-center">Clear all app data including settings and saved codes.</h2>
 							<button className="button" onClick={clear}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

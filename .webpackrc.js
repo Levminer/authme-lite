@@ -1,9 +1,14 @@
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 const path = require("path")
+let source_map = false
+
+if (process.env.NODE_ENV !== "production") {
+	source_map = "inline-source-map"
+}
 
 module.exports = {
 	entry: "./interface/index.js",
-	devtool: "inline-source-map",
+	devtool: source_map,
 	target: "web",
 	cache: true,
 	module: {

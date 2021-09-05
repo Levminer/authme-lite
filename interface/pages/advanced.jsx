@@ -143,7 +143,7 @@ const Advanced = () => {
 
 						<div className="exportMenu mt-3 hidden flex-col justify-center items-center">
 							<h2 className="text-4xl mt-5">Export</h2>
-							<h3 className="text-2xl mt-1">You can export your QR code(s) if you saved them.</h3>
+							<h3 className="text-2xl mt-1 text-center">You can export your QR code(s) if you saved them.</h3>
 							<button className="button m-5" onClick={downloadAlert}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />

@@ -8,7 +8,9 @@ import Router from "./router.js"
 
 const wm = new window.WindowManager()
 
-wm.maximize()
+if (process.env.NODE_ENV === "production") {
+	wm.maximize()
+}
 
 ReactDOM.render(<Router />, document.getElementById("root"))
 
