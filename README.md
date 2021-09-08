@@ -26,11 +26,11 @@
 [![Mac Download](https://img.shields.io/badge/Mac-Download-brightgreen?style=for-the-badge)](https://api.levminer.com/api/v1/authme-lite/alpha/mac)
 [![Updated](https://img.shields.io/github/last-commit/levminer/authme/dev?color=yellowgreen&label=Updated&style=for-the-badge)](https://github.com/Levminer/authme-lite/actions/workflows/alpha-artifacts.yml)
 
-<img src="https://raw.githubusercontent.com/Levminer/authme-lite/main/screenshots/screenshot.png?raw=true">
+<img src="https://raw.githubusercontent.com/Levminer/authme-lite/dev/screenshots/screenshot.png?raw=true">
 
 ## Features
 
--   Lightweight: 3MB on disk, uses 50MB RAM
+-   🔎 Lightweight: 3MB on disk, uses 50MB RAM
 
 ## Project board
 
