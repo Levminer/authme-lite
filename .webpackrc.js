@@ -48,12 +48,15 @@ module.exports = {
 		path: path.resolve(__dirname, "static"),
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "static"),
+		static: {
+			directory: path.join(__dirname, "static"),
+		},
+		client: {
+			overlay: false,
+		},
 		compress: true,
 		port: 8080,
 		hot: true,
-		inline: true,
-		disableHostCheck: true,
 		historyApiFallback: true,
 	},
 	stats: {
