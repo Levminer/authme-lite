@@ -129,7 +129,7 @@ const Codes = () => {
 							<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
 							<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
 							<h1 class="text-3xl font-bold md:mt-3">Name</h1>
-							<h2 id="name${i}" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+							<h2 id="name${i}" tabindex="0" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 							</div>
 							<div class="flex flex-col flex-1 justify-center items-center">
 							<h1 class="text-3xl font-bold md:mt-3">Time</h1>
@@ -137,7 +137,7 @@ const Codes = () => {
 							</div>
 							<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
 							<h1 class="text-3xl font-bold md:mt-3">Code</h1>
-							<h2 id="code${i}" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+							<h2 id="code${i}" tabindex="0" class="text-2xl mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 							</div>
 							</div>
 							<div class="flex flex-col justify-center items-center">

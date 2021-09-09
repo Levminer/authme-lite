@@ -32,15 +32,15 @@
 
 -   🔎 Lightweight: 3MB on disk, uses 50MB RAM
 
+## Contributing and development
+
+-   Read for development and building instructions: [Contributing](https://github.com/Levminer/authme-lite/blob/main/.github/CONTRIBUTING.md)
+-   Read before contributing: [Code Of Conduct](https://github.com/Levminer/authme-lite/blob/main/.github/CODE_OF_CONDUCT.md)
+
 ## Project board
 
 -   You can check out all the issues in progress at the project board!
 -   Check out at: [Projects](https://github.com/Levminer/authme-lite/projects/1)
-
-## Contributing and development
-
--   Read: [Contributing](https://github.com/Levminer/authme-lite/blob/main/.github/CONTRIBUTING.md)
--   Read: [Code Of Conduct](https://github.com/Levminer/authme-lite/blob/main/.github/CODE_OF_CONDUCT.md)
 
 ## License
 

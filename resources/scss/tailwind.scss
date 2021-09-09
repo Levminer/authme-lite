@@ -14,15 +14,19 @@
 	.button {
 		@apply flex flex-row justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
 	}
-
-	svg {
-		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
-	}
 }
 
 @layer base {
 	button {
 		@apply focus-visible:ring-popup-magenta focus-visible:ring-4;
+	}
+
+	h2 {
+		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+	}
+
+	.link {
+		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
 	}
 }
 
