@@ -4,7 +4,7 @@ import { invoke } from "@tauri-apps/api/tauri"
 import { number, date } from "../../../build.json"
 
 /**
- * Show an about dialog 
+ * Show an about dialog
  */
 export const about = async () => {
 	const authme = await app.getVersion()
@@ -33,24 +33,24 @@ export const about = async () => {
  * Show a clear data dialog
  */
 export const clearData = async () => {
-    const message = await invoke("clear_data")
+	const message = await invoke("clear_data")
 
-    if (message === "true") {
-        localStorage.clear()
-        location.reload()
-        location.replace("/")
-    }
+	if (message === "true") {
+		localStorage.clear()
+		location.reload()
+		location.replace("/")
+	}
 }
 
 /**
  * Displays the version info on the page
  */
 export const version = async () => {
-    const authme = await app.getVersion()
+	const authme = await app.getVersion()
 
-    if (number.startsWith("alpha")) {
-        document.querySelector(".ver").textContent = `${authme} (${number})`
-    } else {
-        document.querySelector(".ver").textContent = `${authme} (${date})`
-    }
+	if (number.startsWith("alpha")) {
+		document.querySelector(".ver").textContent = `${authme} (${number})`
+	} else {
+		document.querySelector(".ver").textContent = `${authme} (${date})`
+	}
 }
