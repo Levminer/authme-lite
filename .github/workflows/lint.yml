@@ -4,6 +4,10 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
+            - name: Setup node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 15
             - uses: actions/checkout@v2
             - name: Install modules
               run: npm i
