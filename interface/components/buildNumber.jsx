@@ -10,6 +10,7 @@ const checkBuildNumber = async () => {
 		document.querySelector(".build").style.display = "flex"
 	}
 }
+
 checkBuildNumber()
 
 const BuildNumber = () => {

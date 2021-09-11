@@ -1,6 +1,6 @@
 import React from "react"
 import KeepAlive from "react-activation"
-import { about, clearData, version } from "../../resources/js/settings/index.js"
+import { about, clearData, version } from "../../resources/js/settings/index"
 
 const Settings = () => {
 	version()

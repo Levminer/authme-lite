@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.15.5",
-		"@babel/preset-env": "^7.15.4",
+		"@babel/preset-env": "^7.15.6",
 		"@babel/preset-react": "^7.14.5",
 		"@tauri-apps/api": "^1.0.0-beta.8",
 		"@tauri-apps/cli": "^1.0.0-beta.10",
@@ -44,18 +44,18 @@
 		"node-polyfill-webpack-plugin": "^1.1.4",
 		"postcss": "^8.3.6",
 		"postcss-loader": "^6.1.0",
-		"prettier": "^2.3.1",
+		"prettier": "^2.4.0",
 		"react": "^16.14.0",
 		"react-activation": "^0.9.4",
 		"react-dom": "^16.14.0",
 		"react-router-dom": "^5.3.0",
-		"sass": "^1.39.0",
+		"sass": "^1.39.2",
 		"sass-loader": "^12.1.0",
 		"style-loader": "^3.2.1",
-		"tailwindcss": "^2.2.11",
-		"webpack": "^5.52.0",
+		"tailwindcss": "^2.2.15",
+		"webpack": "^5.52.1",
 		"webpack-cli": "^4.8.0",
-		"webpack-dev-server": "^4.1.1"
+		"webpack-dev-server": "^4.2.0"
 	},
 	"engines": {
 		"node": ">=14.0.0",
