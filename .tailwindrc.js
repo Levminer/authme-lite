@@ -2,7 +2,7 @@ module.exports = {
 	mode: "jit",
 	purge: {
 		enabled: true,
-		content: ["./interface/pages/*.jsx", "./interface/components/*.jsx"],
+		content: ["./interface/**/*.jsx", "./resources/**/*.js"],
 	},
 	theme: {
 		extend: {
