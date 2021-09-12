@@ -4,15 +4,17 @@
 )]
 
 mod about;
-mod error;
 mod clear_data;
+mod error;
+mod os;
 
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
       clear_data::clear_data,
       about::about,
-      error::error
+      error::error,
+      os::os
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

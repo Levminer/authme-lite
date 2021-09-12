@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.ctdiv {
+		@apply container w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+	}
+
+	.buttoni {
+		@apply flex flex-row justify-center items-center mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+	}
+
+	.button {
+		@apply flex flex-row justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+	}
+}
+
+@layer base {
+	button {
+		@apply focus-visible:ring-popup-magenta focus-visible:ring-4;
+	}
+
+	h2 {
+		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+	}
+
+	.link {
+		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+	}
+}
+
+body {
+	color: white;
+	background-color: rgb(10, 10, 10);
+	overflow-y: scroll !important;
+	user-select: none;
+}
+
+* {
+	outline: none !important;
+}
+
+hr {
+	margin: 1.5rem;
+	color: white;
+	width: 100%;
+	padding: 0;
+}
+
+::-webkit-scrollbar-track {
+	background-color: black;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+	background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(20, 20, 20);
+}
+
+::-webkit-scrollbar-corner {
+	background: #292a2d;
+}
+
+::selection {
+	color: white;
+	background: gray;
+}
+
+.progress {
+	top: -30px;
+	position: relative;
+	width: 73%;
+	height: 15px;
+	background: rgb(30, 30, 30);
+	border-radius: 30px;
+	overflow: hidden;
+}
+
+.progress__fill {
+	width: 0%;
+	height: 100%;
+	background: white;
+	transition: all 0.2s;
+}
+
+.buttoni {
+	width: 12rem !important;
+}
+
+.button {
+	width: 14rem !important;
+}
+
+svg {
+	margin-right: 3px !important;
+}
