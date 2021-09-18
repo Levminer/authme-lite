@@ -3,17 +3,19 @@
   windows_subsystem = "windows"
 )]
 
-mod about;
 mod clear_data;
 mod error;
+mod info;
 mod os;
+mod warning;
 
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
       clear_data::clear_data,
-      about::about,
+      warning::warning,
       error::error,
+      info::info,
       os::os
     ])
     .run(tauri::generate_context!())

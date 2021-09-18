@@ -26,7 +26,7 @@ export const about = async () => {
 
 	const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nOS version: ${os_type} ${os_arch.replace("x86_64", "x64")} ${os_version}\nHardware info: ${cpu}${memory} RAM\n\nRelease date: ${date}\nBuild number: ${number}\n\nCreated by: Lőrik Levente`
 
-	invoke("about", { invokeMessage: message })
+	invoke("info", { invokeMessage: message })
 }
 
 /**

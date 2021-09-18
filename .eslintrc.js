@@ -30,5 +30,6 @@ module.exports = {
 		"no-case-declarations": ["off"],
 		"prefer-const": ["warn"],
 		"node/no-unpublished-import": ["off"],
+		"react/no-unescaped-entities": ["off"],
 	},
 }

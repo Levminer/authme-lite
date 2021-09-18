@@ -12,7 +12,7 @@ if (os.platform() === "win32") {
 } else if (os.platform() === "darwin") {
 	try {
 		fs.renameSync("./src-tauri/target/release/Authme Lite", `./src-tauri/target/release/authme-${version}-mac-x64-portable`)
-		fs.renameSync(`./src-tauri/target/release/bundle/msi/Authme Lite_${version}_x64.dmg`, `./src-tauri/target/release/authme-${version}-mac-x64-installer.dmg`)
+		fs.renameSync(`./src-tauri/target/release/bundle/dmg/Authme Lite_${version}_x64.dmg`, `./src-tauri/target/release/authme-${version}-mac-x64-installer.dmg`)
 	} catch (err) {
 		console.log("File not found")
 	}
