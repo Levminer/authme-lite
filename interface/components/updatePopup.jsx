@@ -1,7 +1,11 @@
 import React, { useEffect } from "react"
 import { shell, app } from "@tauri-apps/api"
+import { invoke } from "@tauri-apps/api/tauri"
+import { convert } from "../../libraries/markdown"
 
 const UpdatePopup = () => {
+	let notes
+
 	const checkUpdate = async () => {
 		console.log("Checking for update")
 
@@ -11,6 +15,8 @@ const UpdatePopup = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				try {
+					notes = data.body
+
 					if (data.tag_name > version && data.tag_name != undefined && data.prerelease != true) {
 						console.log("Update found")
 
@@ -27,7 +33,9 @@ const UpdatePopup = () => {
 	}
 
 	const releaseNotes = () => {
-		shell.open("https://github.com/levminer/authme-lite/releases")
+		const release_notes = convert(notes)
+
+		invoke("info", { invokeMessage: release_notes })
 	}
 
 	const close = () => {
@@ -39,7 +47,7 @@ const UpdatePopup = () => {
 	}, [])
 
 	return (
-		<div className="hidden w-full text-white bg-popup-blue font-bold update">
+		<div className="hidden w-full text-white bg-popup-blue font-bold sticky update">
 			<div className="container flex flex-row items-center justify-between px-6 py-4 mx-auto">
 				<div className="flex flex-row justify-center items-center">
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor">
