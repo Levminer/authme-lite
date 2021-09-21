@@ -11,7 +11,7 @@ const UpdatePopup = () => {
 
 		const version = await app.getVersion()
 
-		await fetch("https://api.github.com/repos/Levminer/authme-lite/releases/latest")
+		await fetch("https://api.levminer.com/api/v1/authme-lite/releases")
 			.then((res) => res.json())
 			.then((data) => {
 				try {
