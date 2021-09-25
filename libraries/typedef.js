@@ -6,3 +6,11 @@
  * @property {Array<String>} issuers - Issuers array
  * @property {Array<String>} types - Types array
  */
+
+/**
+ * Authme import file structure
+ * @typedef {Object} LibStorage
+ * @property {String} password - Password encrypted with bcrypt
+ * @property {Boolean} require_password - Require password
+ * @property {String} hash - Text encrypted with password
+ */

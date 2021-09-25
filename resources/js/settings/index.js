@@ -36,6 +36,7 @@ export const clearData = async () => {
 	const message = await invoke("clear_data")
 
 	if (message === "true") {
+		sessionStorage.clear()
 		localStorage.clear()
 		location.reload()
 		location.replace("/")

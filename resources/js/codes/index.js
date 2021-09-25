@@ -1,6 +1,8 @@
 import speakeasy from "@levminer/speakeasy"
 import { invoke } from "@tauri-apps/api/tauri"
 import { convert } from "../../../libraries/convert"
+import bcrypt from "bcryptjs"
+import SimpleCrypto from "simple-crypto-js"
 
 /**
  * Globals
@@ -55,6 +57,8 @@ const convertToText = (file) => {
  */
 const loadHandler = (event) => {
 	const text = event.target.result
+
+	sessionStorage.setItem("text", text)
 
 	const processed = convert(text)
 
@@ -215,54 +219,108 @@ const createElements = (processed) => {
 /**
  * Save loaded codes
  */
-export const saveCodes = () => {
-	const names = JSON.parse(sessionStorage.getItem("names"))
-	const secrets = JSON.parse(sessionStorage.getItem("secrets"))
-	const issuers = JSON.parse(sessionStorage.getItem("issuers"))
-
-	localStorage.setItem("names", JSON.stringify(names))
-	localStorage.setItem("secrets", JSON.stringify(secrets))
-	localStorage.setItem("issuers", JSON.stringify(issuers))
-
+export const saveCodes = async () => {
+	const response = await invoke("password_encryption")
 	document.querySelector("#block2").style.display = "none"
 
-	const message = "Codes saved!"
-	invoke("info", { invokeMessage: message })
+	if (response === "true") {
+		document.querySelector("#block3").style.display = "flex"
+	} else {
+		/**
+		 * LocalStorage Storage
+		 * @type{LibStorage}
+		 */
+		const storage = {
+			password: null,
+			require_password: false,
+			hash: null,
+		}
 
-	const warning = "The save is currently only kept until you update the app!\n\nKeep a copy of the import file!"
-	invoke("warning", { invokeMessage: warning })
+		localStorage.setItem("storage", JSON.stringify(storage))
+
+		const names = JSON.parse(sessionStorage.getItem("names"))
+		const secrets = JSON.parse(sessionStorage.getItem("secrets"))
+		const issuers = JSON.parse(sessionStorage.getItem("issuers"))
+
+		localStorage.setItem("names", JSON.stringify(names))
+		localStorage.setItem("secrets", JSON.stringify(secrets))
+		localStorage.setItem("issuers", JSON.stringify(issuers))
+
+		const message = "Codes saved!\n\nThe save is currently only kept until you update the app!\n\nKeep a copy of the import file!"
+		invoke("warning", { invokeMessage: message })
+	}
 }
 
 /**
  * Load saved codes
  */
 export const loadSavedCodes = () => {
-	const loaded_names = JSON.parse(localStorage.getItem("names"))
-	const loaded_secrets = JSON.parse(localStorage.getItem("secrets"))
-	const loaded_issuers = JSON.parse(localStorage.getItem("issuers"))
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = JSON.parse(localStorage.getItem("storage"))
 
-	if (loaded_names != null) {
-		console.log("Authme - Save found")
+	if (storage.require_password === false) {
+		const loaded_names = JSON.parse(localStorage.getItem("names"))
+		const loaded_secrets = JSON.parse(localStorage.getItem("secrets"))
+		const loaded_issuers = JSON.parse(localStorage.getItem("issuers"))
 
-		save = true
+		if (loaded_names != null) {
+			console.log("Authme - Save found")
 
-		const names = loaded_names
-		const secrets = loaded_secrets
-		const issuers = loaded_issuers
+			save = true
 
-		/**
-		 * Import file structure
-		 * @type {LibImportFile} loaded
-		 */
-		const loaded = {
-			names,
-			secrets,
-			issuers,
+			const names = loaded_names
+			const secrets = loaded_secrets
+			const issuers = loaded_issuers
+
+			/**
+			 * Import file structure
+			 * @type {LibImportFile} loaded
+			 */
+			const loaded = {
+				names,
+				secrets,
+				issuers,
+			}
+
+			createElements(loaded)
+		} else {
+			console.warn("Authme - No save found")
 		}
+	}
+}
 
-		createElements(loaded)
+export const loadEncryptedSavedCodes = async () => {
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = JSON.parse(localStorage.getItem("storage"))
+
+	const text = document.querySelector("#text2")
+	const password_input = Buffer.from(document.querySelector("#password_input2").value)
+
+	const compare = await bcrypt.compare(password_input.toString(), storage.password)
+
+	if (compare === true) {
+		text.style.color = "#28A443"
+		text.textContent = "Passwords match! Please wait!"
+
+		const aes = new SimpleCrypto(password_input)
+
+		const decrypted = aes.decrypt(storage.hash)
+
+		const processed = convert(decrypted)
+
+		createElements(processed)
+
+		document.querySelector("#block2").style.display = "none"
+		document.querySelector("#block4").style.display = "none"
 	} else {
-		console.warn("Authme - No save found")
+		text.style.color = "#A30015"
+		text.textContent = "Passwords don't match! Try again!"
 	}
 }
 
@@ -305,4 +363,67 @@ export const search = () => {
  */
 export const createFile = () => {
 	location.replace("/advanced")
+}
+
+export const createPassword = () => {
+	const text = document.querySelector("#text")
+	const password_input0 = Buffer.from(document.querySelector("#password_input0").value)
+	const password_input1 = Buffer.from(document.querySelector("#password_input1").value)
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = {}
+
+	const encryptCodes = () => {
+		const text = sessionStorage.getItem("text")
+
+		const aes = new SimpleCrypto(password_input0.toString())
+		const encrypted = aes.encrypt(text)
+
+		storage.hash = encrypted
+
+		localStorage.setItem("storage", JSON.stringify(storage))
+		sessionStorage.clear()
+
+		password_input0.fill(0)
+		password_input1.fill(0)
+
+		document.querySelector("#block3").style.display = ""
+	}
+
+	const hashPasswords = async () => {
+		const salt = await bcrypt.genSalt(10)
+
+		const hashed = await bcrypt.hash(password_input0.toString(), salt)
+
+		storage.password = hashed
+		storage.require_password = true
+
+		localStorage.setItem("storage", JSON.stringify(storage))
+
+		encryptCodes()
+	}
+
+	if (password_input0.toString().length > 64) {
+		text.style.color = "#A30015"
+		text.textContent = "Maximum password length is 64 characters!"
+	} else if (password_input0.toString().length < 8) {
+		text.style.color = "#A30015"
+		text.textContent = "Minimum password length is 8 characters!"
+	} else {
+		if (password_input0.toString() == password_input1.toString()) {
+			console.warn("Authme - Passwords match!")
+
+			text.style.color = "#28A443"
+			text.textContent = "Passwords match! Please wait!"
+
+			hashPasswords()
+		} else {
+			console.warn("Authme - Passwords dont match!")
+
+			text.style.color = "#A30015"
+			text.textContent = "Passwords don't match! Try again!"
+		}
+	}
 }

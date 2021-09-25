@@ -3,6 +3,7 @@
   windows_subsystem = "windows"
 )]
 
+mod password_encryption;
 mod clear_data;
 mod error;
 mod info;
@@ -12,6 +13,7 @@ mod warning;
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
+      password_encryption::password_encryption,
       clear_data::clear_data,
       warning::warning,
       error::error,
