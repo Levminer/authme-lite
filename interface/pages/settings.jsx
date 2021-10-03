@@ -1,9 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
-import { about, clearData, version } from "../../resources/js/settings/index"
+import { about, clearData, version, names, changeNames } from "../../resources/js/settings/index"
 
+let render = false
 const Settings = () => {
 	version()
+
+	if (render === false) {
+		useEffect(() => {
+			setTimeout(() => {
+				names()
+			}, 100)
+		}, [])
+
+		render = true
+	}
 
 	return (
 		<>
@@ -11,6 +22,18 @@ const Settings = () => {
 				<div className="flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center w-1/2">
 						<h1 className="text-gray-50">Settings</h1>
+						<hr />
+						<h3>Show 2FA names</h3>
+						<h4 className="mt-1 text-center">The saved 2FA names will show up. You can copy it after clicking it.</h4>
+						<div className="flex justify-center items-center w-56 h-14 mt-4 bg-white mx-auto rounded-full">
+							<div className="relative inline-block w-12 mr-2 align-middle select-none bg-gray-900 border-2 border-gray-900 rounded-full">
+								<input id="tgl0" onClick={changeNames} type="checkbox" className="toggle checked:bg-white outline-none focus:outline-none right-6 duration-200 ease-in absolute block w-4 h-4 rounded-full top-1 bg-black appearance-none cursor-pointer" />
+								<label htmlFor="tgl0" className="toggle-bg block overflow-hidden h-6 rounded-full bg-white cursor-pointer"></label>
+							</div>
+							<span id="tgt0" className="text-black text-xl">
+								-
+							</span>
+						</div>
 						<hr />
 						<div className="flex justify-center items-center flex-col">
 							<h3>Clear data</h3>

@@ -6,7 +6,7 @@ const checkBuildNumber = async () => {
 	if (number.startsWith("alpha")) {
 		const version = await app.getVersion()
 
-		document.querySelector(".build-content").textContent = `You are running an alpha version of Authme - Version ${version} - Build ${number}`
+		document.querySelector(".build-content").textContent = `You are running an alpha version of Authme Lite - Version ${version} - Build ${number}`
 		document.querySelector(".build").style.display = "flex"
 	}
 }

@@ -145,3 +145,17 @@ svg {
 	transition: 0.2s ease-in;
 	color: transparent;
 }
+
+input::-ms-reveal,
+input::-ms-clear {
+	display: none;
+}
+
+.toggle:checked ~ .toggle-bg {
+	background-color: black !important;
+	transition: 0.2s ease-in;
+}
+
+.toggle:checked {
+	right: 4px !important;
+}

@@ -13,4 +13,6 @@
  * @property {String} password - Password encrypted with bcrypt
  * @property {Boolean} require_password - Require password
  * @property {String} hash - Text encrypted with password
+ * @property {Object} settings - App settings
+ * @property {Boolean} settings.names - Show 2FA names
  */

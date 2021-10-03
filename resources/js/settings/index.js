@@ -2,6 +2,7 @@ import React from "react"
 import { app, os } from "@tauri-apps/api"
 import { invoke } from "@tauri-apps/api/tauri"
 import { number, date } from "../../../build.json"
+import "../../../libraries/typedef"
 
 /**
  * Show an about dialog
@@ -54,4 +55,76 @@ export const version = async () => {
 	} else {
 		document.querySelector(".ver").textContent = `${authme} (${date})`
 	}
+}
+
+let names_state
+/**
+ * Settings for 2FA names
+ */
+export const names = () => {
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = JSON.parse(localStorage.getItem("storage"))
+
+	const tgl0 = document.querySelector("#tgl0")
+	const tgt0 = document.querySelector("#tgt0")
+
+	if (storage === null) {
+		tgl0.checked = false
+		tgt0.textContent = "Off"
+		names_state = false
+		return console.warn("Codes not saved yet")
+	} else if (storage.settings.names === true) {
+		names_state = true
+
+		tgl0.checked = true
+		tgt0.textContent = "On"
+	} else if (storage.settings.names === false) {
+		names_state = false
+
+		tgl0.checked = false
+		tgt0.textContent = "Off"
+	}
+}
+
+export const changeNames = () => {
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = JSON.parse(localStorage.getItem("storage"))
+
+	const tgl0 = document.querySelector("#tgl0")
+	const tgt0 = document.querySelector("#tgt0")
+
+	if (storage === null) {
+		tgl0.checked = false
+		tgt0.textContent = "Off"
+		names_state = false
+		return console.warn("Codes not saved yet")
+	}
+
+	if (names_state === false) {
+		tgl0.checked = true
+		tgt0.textContent = "On"
+
+		names_state = true
+
+		storage.settings.names = true
+
+		localStorage.setItem("storage", JSON.stringify(storage))
+	} else {
+		tgl0.checked = false
+		tgt0.textContent = "Off"
+
+		names_state = false
+
+		storage.settings.names = false
+
+		localStorage.setItem("storage", JSON.stringify(storage))
+	}
+
+	location.reload()
 }

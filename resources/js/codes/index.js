@@ -80,6 +80,18 @@ const errorHandler = (event) => {
  * @param {LibImportFile} processed
  */
 const createElements = (processed) => {
+	/**
+	 * LocalStorage Storage
+	 * @type{LibStorage}
+	 */
+	const storage = JSON.parse(localStorage.getItem("storage"))
+
+	let names_state = false
+
+	if (storage !== null) {
+		names_state = storage.settings.names
+	}
+
 	const names = processed.names
 	const secrets = processed.secrets
 	const issuers = processed.issuers
@@ -100,40 +112,79 @@ const createElements = (processed) => {
 			const element = document.createElement("div")
 
 			// set div elements
-			element.innerHTML = `
-                        <div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
-                        <div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
-                        <h1 class="text-3xl font-bold md:mt-3">Name</h1>
-                        <h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
-                        </div>
-                        <div class="flex flex-col flex-1 justify-center items-center">
-                        <h1 class="text-3xl font-bold md:mt-3">Time</h1>
-                        <h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
-                        </div>
-                        <div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
-                        <h1 class="text-3xl font-bold md:mt-3">Code</h1>
-                        <h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
-                        </div>
-                        </div>
-                        <div class="flex flex-col justify-center items-center">
-                        <div class="progress">
-                        <div id="progress${i}" class="progress__fill"></div>
-                        <span class="progress__text">0%</span>
-                        </div>
-                        <button id="copy${i}" class="buttoni">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
-                        Copy
-                        </button>
-                        </div>
-            
-            `
+			if (names_state === false) {
+				element.innerHTML = `
+				<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
+				<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
+				<h1 class="text-3xl font-bold md:mt-3">Name</h1>
+				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				</div>
+				<div class="flex flex-col flex-1 justify-center items-center">
+				<h1 class="text-3xl font-bold md:mt-3">Time</h1>
+				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
+				</div>
+				<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
+				<h1 class="text-3xl font-bold md:mt-3">Code</h1>
+				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				</div>
+				</div>
+				<div class="flex flex-col justify-center items-center">
+				<div class="progress">
+				<div id="progress${i}" class="progress__fill"></div>
+				<span class="progress__text">0%</span>
+				</div>
+				<button id="copy${i}" class="buttoni">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+				</svg>
+				Copy
+				</button>
+				</div>
+				`
+			} else {
+				element.innerHTML = `
+				<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
+				<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
+				<h1 class="text-3xl font-bold md:mt-3">Name</h1>
+				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				</div>
+				<div class="flex flex-col flex-1 justify-center items-center">
+				<h1 class="text-3xl font-bold md:mt-3">Time</h1>
+				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
+				</div>
+				<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
+				<h1 class="text-3xl font-bold md:mt-3">Code</h1>
+				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				</div>
+				</div>
+				<div class="flex flex-col flex-1 justify-center items-center lg:mr-20 lg:ml-20 md:mr-5 md:ml-5">
+				<h2 id="names${i}" tabindex="0" class="text-2xl font-normal text-center w-full relative -top-10 mb-4 py-2 px-5 rounded-2xl bg-gray-600 select-all"></h2>
+				</div>
+				<div class="flex flex-col justify-center items-center">
+				<div class="progress">
+				<div id="progress${i}" class="progress__fill"></div>
+				<span class="progress__text">0%</span>
+				</div>
+				<button id="copy${i}" class="buttoni">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+				</svg>
+				Copy
+				</button>
+				</div>
+				`
+			}
 
 			// set div in html
 			element.classList.add("ctdiv")
 			element.setAttribute("id", `container${i}`)
 			document.querySelector(".next").appendChild(element)
+
+			// names
+			if (names_state === true) {
+				const names_text = document.querySelector(`#names${i}`)
+				names_text.textContent = names[i]
+			}
 
 			// elements
 			const name_text = document.querySelector(`#name${i}`)
@@ -234,6 +285,9 @@ export const saveCodes = async () => {
 			password: null,
 			require_password: false,
 			hash: null,
+			settings: {
+				names: false,
+			},
 		}
 
 		localStorage.setItem("storage", JSON.stringify(storage))
@@ -399,6 +453,7 @@ export const createPassword = () => {
 
 		storage.password = hashed
 		storage.require_password = true
+		storage.settings = { names: false }
 
 		localStorage.setItem("storage", JSON.stringify(storage))
 
