@@ -16,7 +16,7 @@ export const convert = (text) => {
 	let c2 = 2
 	let c3 = 3
 
-	// remove double qoutes
+	// remove double quotes
 	const pre_data1 = text.replace(/"/g, "")
 
 	// new line

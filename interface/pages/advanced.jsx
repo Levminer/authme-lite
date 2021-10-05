@@ -6,9 +6,9 @@ const Advanced = () => {
 	return (
 		<>
 			<KeepAlive>
-				<div className="conatiner flex flex-col justify-center items-center mb-32">
+				<div className="flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center w-1/2">
-						<h1 className="text-gray-50 text-6xl mb-10">Advanced</h1>
+						<h1 className="text-gray-50 mb-1">Advanced</h1>
 						<div className="flex justify-center items-center flex-row gap-3">
 							<button className="importButton button" onClick={switchMenu}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,9 +24,9 @@ const Advanced = () => {
 							</button>
 						</div>
 
-						<div className="importMenu mt-3 flex flex-col justify-center items-center">
-							<h2 className="text-4xl mt-5">Import</h2>
-							<h3 className="text-2xl mt-1">You can import from QR code(s) here.</h3>
+						<div className="importMenu block-container mt-1 flex flex-col justify-center items-center">
+							<h3 className="mt-5">Import</h3>
+							<h4 className="mt-1">You can import from QR code(s) here.</h4>
 							<input type="file" className="hidden" id="file" onChange={processCodes} accept=".jpg, .jpeg, .png, .bmp" multiple />
 							<button type="button" className="button m-5" id="input" onClick={importCodes}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,9 +36,9 @@ const Advanced = () => {
 							</button>
 						</div>
 
-						<div className="exportMenu mt-3 hidden flex-col justify-center items-center">
-							<h2 className="text-4xl mt-5">Export</h2>
-							<h3 className="text-2xl mt-1 text-center">You can export your QR code(s) if you saved them.</h3>
+						<div className="exportMenu block-container mt-1 hidden flex-col justify-center items-center">
+							<h3 className="mt-5">Export</h3>
+							<h4 className="mt-1 text-center">You can export your QR code(s) if you saved them.</h4>
 							<button className="button m-5" onClick={exportCodes}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />

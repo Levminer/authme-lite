@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+	.block-container {
+		@apply flex flex-col justify-center items-center mx-auto w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+	}
+
 	.ctdiv {
 		@apply container w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
 	}
@@ -13,6 +17,10 @@
 
 	.button {
 		@apply flex flex-row justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+	}
+
+	.input {
+		@apply flex flex-row text-center justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
 	}
 }
 
@@ -28,6 +36,29 @@
 	.link {
 		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
 	}
+}
+
+h1 {
+	font-size: 64px;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 48px;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 32px;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 24px;
+}
+
+h5 {
+	font-size: 18px;
 }
 
 body {
@@ -97,4 +128,34 @@ hr {
 
 svg {
 	margin-right: 3px !important;
+}
+
+/* inputs */
+.input::placeholder {
+	transition: 0.2s ease-in;
+	color: black;
+}
+
+.input:focus::placeholder {
+	transition: 0.2s ease-in;
+	color: transparent;
+}
+
+.input:hover::placeholder {
+	transition: 0.2s ease-in;
+	color: transparent;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+	display: none;
+}
+
+.toggle:checked ~ .toggle-bg {
+	background-color: black !important;
+	transition: 0.2s ease-in;
+}
+
+.toggle:checked {
+	right: 4px !important;
 }

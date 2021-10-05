@@ -118,9 +118,11 @@ const createCodes = (event) => {
  * Export saved codes
  */
 export const exportCodes = () => {
-	const names = JSON.parse(localStorage.getItem("name"))
-	const secrets = JSON.parse(localStorage.getItem("secret"))
-	const issuers = JSON.parse(localStorage.getItem("issuer"))
+	const names = JSON.parse(localStorage.getItem("names"))
+	const secrets = JSON.parse(localStorage.getItem("secrets"))
+	const issuers = JSON.parse(localStorage.getItem("issuers"))
+
+	console.log(names)
 
 	if (names === null) {
 		return invoke("error", { invokeMessage: "No save file found!\n\nGo back to the codes page and save your codes!" })
