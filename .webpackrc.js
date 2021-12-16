@@ -17,19 +17,15 @@ module.exports = {
 				test: [/\.js$/, /\.jsx$/],
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader",
+					loader: "swc-loader",
 					options: {
-						presets: [
-							[
-								"@babel/preset-env",
-								{
-									targets: {
-										esmodules: true,
-									},
-								},
-							],
-							"@babel/preset-react",
-						],
+						jsc: {
+							"parser": {
+								"syntax": "ecmascript",
+								"jsx": true,
+							  },
+							  "target": "es2016",
+						},
 					},
 				},
 			},
