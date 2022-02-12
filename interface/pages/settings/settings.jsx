@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
-import { about, clearData, version, names, changeNames } from "../../resources/js/settings/index"
+import { about, clearData, version, names, changeNames } from "./index"
 
 let render = false
 const Settings = () => {

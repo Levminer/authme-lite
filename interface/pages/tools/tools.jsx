@@ -1,6 +1,6 @@
 import React from "react"
 import KeepAlive from "react-activation"
-import { switchMenu, processCodes, importCodes, exportCodes } from "../../resources/js/advanced"
+import { switchMenu, processCodes, importCodes, exportCodes } from "."
 
 const Advanced = () => {
 	return (
@@ -8,7 +8,7 @@ const Advanced = () => {
 			<KeepAlive>
 				<div className="flex flex-col justify-center items-center mb-32">
 					<div className="mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center w-1/2">
-						<h1 className="text-gray-50 mb-1">Advanced</h1>
+						<h1 className="text-gray-50 mb-1">Tools</h1>
 						<div className="flex justify-center items-center flex-row gap-3">
 							<button className="importButton button" onClick={switchMenu}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

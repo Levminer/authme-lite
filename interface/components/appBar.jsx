@@ -1,11 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { number } from "../../build.json"
+import build from "../../build.json"
 import BuildNumber from "./buildNumber.jsx"
 import UpdatePopup from "./updatePopup.jsx"
 
 const style = async () => {
-	if (number.startsWith("alpha")) {
+	if (build.number.startsWith("alpha")) {
 		setTimeout(() => {
 			document.querySelector("#header").style.top = "40px"
 		}, 100)
@@ -21,7 +21,7 @@ const AppBar = () => {
 			<UpdatePopup />
 			<header id="header" className="text-gray-50 bg-gray-900 sticky z-40">
 				<div className="container mx-auto flex lex-shrink-0 flex-wrap p-5 flex-col md:flex-row items-center">
-					<nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+					<nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center gap-5">
 						{/* codes tab */}
 						<button tabIndex="-1" className="mr-5 text-2xl hover:text-gray-300 duration-200 cursor-pointer flex flex-col justify-center items-center">
 							<Link to="/" className="link flex flex-col justify-center items-center">
@@ -38,7 +38,7 @@ const AppBar = () => {
 								<svg tabIndex="-1" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
 								</svg>
-								Advanced
+								Tools
 							</Link>
 						</button>
 

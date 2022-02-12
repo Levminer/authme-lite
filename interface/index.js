@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { window } from "@tauri-apps/api"
 
-import "../resources/scss/tailwind.scss"
+import "./styles/index.css"
 
 import Router from "./router.js"
 

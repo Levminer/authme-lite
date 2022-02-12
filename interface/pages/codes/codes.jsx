@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
-import { loadSavedCodes, saveCodes, loadFile, openDialog, createFile, search, createPassword, loadEncryptedSavedCodes } from "../../resources/js/codes"
+import { loadSavedCodes, saveCodes, loadFile, openDialog, createFile, search, createPassword, loadEncryptedSavedCodes } from "."
 
 let render = false
 

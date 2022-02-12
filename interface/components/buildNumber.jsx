@@ -1,12 +1,12 @@
 import React from "react"
-import { number } from "../../build.json"
+import build from "../../build.json"
 import { app } from "@tauri-apps/api"
 
 const checkBuildNumber = async () => {
-	if (number.startsWith("alpha")) {
+	if (build.number.startsWith("alpha")) {
 		const version = await app.getVersion()
 
-		document.querySelector(".build-content").textContent = `You are running an alpha version of Authme Lite - Version ${version} - Build ${number}`
+		document.querySelector(".build-content").textContent = `You are running an alpha version of Authme Lite - Version ${version} - Build ${build.number}`
 		document.querySelector(".build").style.display = "flex"
 	}
 }
