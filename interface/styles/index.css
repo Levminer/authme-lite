@@ -4,23 +4,23 @@
 
 @layer components {
 	.block-container {
-		@apply flex flex-col justify-center items-center mx-auto w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+		@apply mx-auto mt-10 mb-10 flex w-2/3 flex-col items-center justify-center rounded-2xl bg-gray-800;
 	}
 
-	.ctdiv {
-		@apply container w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+	.codes-container {
+		@apply container mt-10 mb-10 w-2/3 rounded-2xl bg-gray-800;
 	}
 
 	.buttoni {
-		@apply flex flex-row justify-center items-center mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mb-6 flex w-48 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 
 	.button {
-		@apply flex flex-row justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mt-3 mb-6 flex w-56 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 
 	.input {
-		@apply flex flex-row text-center justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mt-3 mb-6 flex transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-center text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 }
 
@@ -30,11 +30,11 @@
 	}
 
 	h2 {
-		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+		@apply focus-visible:ring-popup-magenta focus-visible:rounded-2xl focus-visible:ring-4;
 	}
 
 	.link {
-		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+		@apply focus-visible:ring-popup-magenta focus-visible:rounded-2xl focus-visible:ring-4;
 	}
 }
 
@@ -116,14 +116,6 @@ hr {
 	height: 100%;
 	background: white;
 	transition: all 0.2s;
-}
-
-.buttoni {
-	width: 12rem !important;
-}
-
-.button {
-	width: 14rem !important;
 }
 
 svg {

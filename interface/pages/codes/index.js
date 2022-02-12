@@ -176,7 +176,7 @@ const createElements = (processed) => {
 			}
 
 			// set div in html
-			element.classList.add("ctdiv")
+			element.classList.add("codes-container")
 			element.setAttribute("id", `container${i}`)
 			document.querySelector(".next").appendChild(element)
 

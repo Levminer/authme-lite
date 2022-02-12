@@ -1,5 +1,5 @@
 module.exports = {
-	content: ["./interface/**/*.jsx", "./resources/**/*.js"],
+	content: ["./interface/**/*.jsx", "./interface/**/*.js"],
 	theme: {
 		extend: {
 			inset: {

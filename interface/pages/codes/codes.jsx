@@ -35,17 +35,17 @@ const Codes = () => {
 	return (
 		<>
 			<KeepAlive>
-				<div className="flex flex-col justify-center items-center mb-32 ">
-					<div className="next mt-52 bg-gray-700 pt-16 pb-16 rounded-3xl flex flex-col justify-center items-center w-1/2">
+				<div className="mb-32 flex flex-col items-center justify-center ">
+					<div className="next mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
 						<h1 className="text-gray-50">Codes</h1>
-						<div className="flex flex-col justify-center mx-a w-full">
+						<div className="mx-a flex w-full flex-col justify-center">
 							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".txt" />
 
 							<div className="block-container" id="block0">
 								<h3 className="mt-3 mb-3">Please choose your import file!</h3>
 								<h4>If you don't have an import file please create one!</h4>
 
-								<div className="flex flex-row mt-3 space-x-5">
+								<div className="mt-3 flex flex-row space-x-5">
 									<button type="button" className="button" id="input" onClick={openDialog}>
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
@@ -66,7 +66,7 @@ const Codes = () => {
 								<input type="text" spellCheck="false" id="search" className="input mt-10 hidden w-2/5" onKeyUp={search} onKeyDown={search} placeholder="Search for names..." />
 							</div>
 
-							<div className="justify-center block-container hidden" id="block2">
+							<div className="block-container hidden justify-center" id="block2">
 								<h3 className="mt-3 mb-3">Save codes</h3>
 								<h4>Save your code(s) to your computer for future use.</h4>
 								<button type="button" className="button" id="save" onClick={saveCodes}>
@@ -77,7 +77,7 @@ const Codes = () => {
 								</button>
 							</div>
 
-							<div className="justify-center block-container hidden" id="block3">
+							<div className="block-container hidden justify-center" id="block3">
 								<h3 className="mt-3 mb-3">Create password</h3>
 								<h4 id="text">Create a password to save and encrypt your codes!</h4>
 								<h5 className="-mb-10 mt-5">Password</h5>
@@ -92,7 +92,7 @@ const Codes = () => {
 								</button>
 							</div>
 
-							<div className="justify-center block-container hidden" id="block4">
+							<div className="block-container hidden justify-center" id="block4">
 								<h3 className="mt-3 mb-3">Confirm password</h3>
 								<h4 id="text2">Please type in a password to continue!</h4>
 								<h5 className="-mb-10 mt-5">Password</h5>
