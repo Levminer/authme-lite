@@ -4,6 +4,8 @@ let source_map = false
 
 if (process.env.NODE_ENV !== "production") {
 	source_map = "inline-source-map"
+} else {
+	source_map = "eval"
 }
 
 module.exports = {
@@ -20,11 +22,11 @@ module.exports = {
 					loader: "swc-loader",
 					options: {
 						jsc: {
-							"parser": {
-								"syntax": "ecmascript",
-								"jsx": true,
-							  },
-							  "target": "es2016",
+							parser: {
+								syntax: "ecmascript",
+								jsx: true,
+							},
+							target: "es2016",
 						},
 					},
 				},

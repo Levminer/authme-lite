@@ -1,8 +1,8 @@
-import React from "react"
 import { app, os } from "@tauri-apps/api"
 import { invoke } from "@tauri-apps/api/tauri"
 import build from "../../../build.json"
 import "../../../libraries/typedef"
+import { UAParser } from "ua-parser-js"
 
 /**
  * Show an about dialog
@@ -13,6 +13,7 @@ export const about = async () => {
 	const os_type = await os.type()
 	const os_arch = await os.arch()
 	const os_version = await os.version()
+	const chrome_version = new UAParser().getBrowser().version
 
 	let hardware = await invoke("os")
 
@@ -25,7 +26,7 @@ export const about = async () => {
 		.replace(/ +(?= )/g, "")
 	const memory = `${Math.round(hardware[1] / 1024 / 1024)}GB`
 
-	const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nReact: ${React.version}\n\nOS version: ${os_type} ${os_arch.replace("x86_64", "x64")} ${os_version}\nHardware info: ${cpu}${memory} RAM\n\nRelease date: ${build.date}\nBuild number: ${build.number}\n\nCreated by: Lőrik Levente`
+	const message = `Authme Lite: ${authme} \n\nTauri: ${tauri}\nChrome: ${chrome_version}\n\nOS version: ${os_type} ${os_arch.replace("x86_64", "x64")} ${os_version}\nHardware info: ${cpu}${memory} RAM\n\nRelease date: ${build.date}\nBuild number: ${build.number}\n\nCreated by: Lőrik Levente`
 
 	invoke("info", { invokeMessage: message })
 }

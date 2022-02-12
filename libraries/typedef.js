@@ -16,3 +16,13 @@
  * @property {Object} settings - App settings
  * @property {Boolean} settings.names - Show 2FA names
  */
+
+/**
+ * .authme file structure
+ * @typedef {object} LibAuthmeFile
+ * @property {string} role - Role of the file (codes, import, export, rollback, backup)
+ * @property {boolean} encrypted - Is the file encrypted
+ * @property {string} codes - Base64 encoded string
+ * @property {Date} date - Date when the file created
+ * @property {number} version - Indicates version (3)
+ */

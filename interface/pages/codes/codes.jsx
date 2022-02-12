@@ -39,7 +39,7 @@ const Codes = () => {
 					<div className="next mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
 						<h1 className="text-gray-50">Codes</h1>
 						<div className="mx-a flex w-full flex-col justify-center">
-							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".txt" />
+							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".authme" />
 
 							<div className="block-container" id="block0">
 								<h3 className="mt-3 mb-3">Please choose your import file!</h3>
