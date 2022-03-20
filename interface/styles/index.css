@@ -16,7 +16,7 @@
 	}
 
 	.button {
-		@apply mt-3 mb-6 flex w-56 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
+		@apply mt-3 mb-6 flex w-64 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 
 	.input {

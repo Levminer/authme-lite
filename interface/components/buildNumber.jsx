@@ -15,10 +15,10 @@ checkBuildNumber()
 
 const BuildNumber = () => {
 	return (
-		<div className="w-full hidden text-white bg-black font-bold build sticky top-0 z-40">
-			<div className="container flex flex-row items-center justify-center px-6 py-2 mx-auto">
+		<div className="build sticky top-0 z-40 hidden w-full bg-black font-bold text-white">
+			<div className="container mx-auto flex flex-row items-center justify-center px-6 py-2">
 				<div className="flex">
-					<p className="mx-3 flex flex-row build-content">You are running a pre release version of Authme!</p>
+					<p className="build-content mx-3 flex flex-row text-center">You are running a pre release version of Authme!</p>
 				</div>
 			</div>
 		</div>

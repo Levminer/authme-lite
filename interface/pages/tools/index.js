@@ -49,7 +49,7 @@ export const openImportCodes = () => {
  * Convert images to strings
  * @param {import("react").SyntheticEvent} event
  */
-export const importCodes = (event) => {
+export const importCodes = async (event) => {
 	event.persist()
 
 	const arr = event.target.files
@@ -65,63 +65,63 @@ export const importCodes = (event) => {
 			const qr = new QrcodeDecoder()
 
 			// decode image
-			qr.decodeFromImage(image).then((res) => {
-				if (res === false) {
-					// no qr code found
-					return invoke("error", { invokeMessage: "No QR code found on the picture!\n\nPlease try again with another picture!" })
-				} else if (res.data.startsWith("otpauth://totp/")) {
-					// construct
-					let url = res.data.replaceAll(/\s/g, "")
-					url = url.slice(15)
+			const res = await qr.decodeFromImage(image)
 
-					// get name
-					const name_index = url.match(/[?]/)
-					const name = url.slice(0, name_index.index)
-					url = url.slice(name.length + 1)
+			if (res === false) {
+				// no qr code found
+				return invoke("error", { invokeMessage: "No QR code found on the picture!\n\nPlease try again with another picture!" })
+			} else if (res.data.startsWith("otpauth://totp/")) {
+				// construct
+				let url = res.data.replaceAll(/\s/g, "")
+				url = url.slice(15)
 
-					// get secret
-					const secret_index = url.match(/[&]/)
-					const secret = url.slice(7, secret_index.index)
-					url = url.slice(secret.length + 14 + 1)
+				// get name
+				const name_index = url.match(/[?]/)
+				const name = url.slice(0, name_index.index)
+				url = url.slice(name.length + 1)
 
-					// get issuer
-					const issuer = url
-					names.push(name)
-					secrets.push(secret)
-					issuers.push(issuer)
+				// get secret
+				const secret_index = url.match(/[&]/)
+				const secret = url.slice(7, secret_index.index)
+				url = url.slice(secret.length + 14 + 1)
 
-					if (arr.length === i + 1) {
-						invoke("info", { invokeMessage: "QR code(s) found!" })
+				// get issuer
+				const issuer = url
+				names.push(name)
+				secrets.push(secret)
+				issuers.push(issuer)
 
-						setTimeout(() => {
-							let str = ""
+				if (arr.length === i + 1) {
+					invoke("info", { invokeMessage: "QR code(s) found!" })
 
-							for (let j = 0; j < names.length; j++) {
-								const substr = `\nName:   ${names[j].trim()} \nSecret: ${secrets[j].trim()} \nIssuer: ${issuers[j].trim()} \nType:   OTP_TOTP\n`
-								str += substr
-							}
+					setTimeout(() => {
+						let str = ""
 
-							/**
-							 * .authme import file
-							 * @type {LibAuthmeFile}
-							 */
-							const save_file = {
-								role: "import",
-								encrypted: false,
-								codes: Buffer.from(str).toString("base64"),
-								date: new Date().toISOString().replace("T", "-").replaceAll(":", "-").substring(0, 19),
-								version: 3,
-							}
+						for (let j = 0; j < names.length; j++) {
+							const substr = `\nName:   ${names[j].trim()} \nSecret: ${secrets[j].trim()} \nIssuer: ${issuers[j].trim()} \nType:   OTP_TOTP\n`
+							str += substr
+						}
 
-							const blob = new Blob([JSON.stringify(save_file, null, "\t")], { type: "text/plain;charset=utf-8" })
-							FileSaver.saveAs(blob, "authme_lite_import.authme")
-						}, 500)
-					}
-				} else {
-					// no qr code found
-					return invoke("error", { invokeMessage: "Wrong QR code found on the picture!\n\nPlease try again with another picture!" })
+						/**
+						 * .authme import file
+						 * @type {LibAuthmeFile}
+						 */
+						const save_file = {
+							role: "import",
+							encrypted: false,
+							codes: Buffer.from(str).toString("base64"),
+							date: new Date().toISOString().replace("T", "-").replaceAll(":", "-").substring(0, 19),
+							version: 3,
+						}
+
+						const blob = new Blob([JSON.stringify(save_file, null, "\t")], { type: "text/plain;charset=utf-8" })
+						FileSaver.saveAs(blob, "authme_lite_import.authme")
+					}, 500)
 				}
-			})
+			} else {
+				// no qr code found
+				return invoke("error", { invokeMessage: "Wrong QR code found on the picture!\n\nPlease try again with another picture!" })
+			}
 		}
 
 		processImages()

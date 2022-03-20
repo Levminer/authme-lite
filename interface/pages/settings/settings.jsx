@@ -25,13 +25,13 @@ const Settings = () => {
 						<hr />
 						<h3>Show 2FA names</h3>
 						<h4 className="mt-1 text-center">The saved 2FA names will show up. You can copy it after clicking it.</h4>
-						<div className="mx-auto mt-4 flex h-14 w-56 items-center justify-center rounded-full bg-white">
+						<div className="mx-auto mt-4 flex h-14 w-64 items-center justify-center rounded-full bg-white">
 							<div className="relative mr-2 inline-block w-12 select-none rounded-full border-2 border-gray-900 bg-gray-900 align-middle">
 								<input id="tgl0" onClick={changeNames} type="checkbox" className="toggle absolute right-6 top-1 block h-4 w-4 cursor-pointer appearance-none rounded-full bg-black outline-none duration-200 ease-in checked:bg-white focus:outline-none" />
 								<label htmlFor="tgl0" className="toggle-bg block h-6 cursor-pointer overflow-hidden rounded-full bg-white"></label>
 							</div>
 							<span id="tgt0" className="text-xl text-black">
-								-
+								Off
 							</span>
 						</div>
 						<hr />

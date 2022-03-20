@@ -37,7 +37,7 @@ const Codes = () => {
 			<KeepAlive>
 				<div className="mb-32 flex flex-col items-center justify-center ">
 					<div className="next mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
-						<h1 className="text-gray-50">Codes</h1>
+						<h1 className="text-gray-50">Authme</h1>
 						<div className="mx-a flex w-full flex-col justify-center">
 							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".authme" />
 
