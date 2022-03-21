@@ -334,12 +334,16 @@ export const loadEncryptedSavedCodes = async () => {
 
 		const decrypted = aes.decrypt(storage.hash)
 
-		const processed = convert(decrypted)
+		const processed = convert(Buffer.from(decrypted, "base64").toString())
 
-		createElements(processed)
+		setTimeout(() => {
+			console.log(processed)
 
-		document.querySelector("#block2").style.display = "none"
-		document.querySelector("#block4").style.display = "none"
+			createElements(processed)
+
+			document.querySelector("#block2").style.display = "none"
+			document.querySelector("#block4").style.display = "none"
+		}, 300)
 	} else {
 		text.style.color = "#A30015"
 		text.textContent = "Passwords don't match! Try again!"
@@ -352,6 +356,7 @@ export const loadEncryptedSavedCodes = async () => {
 export const search = () => {
 	const search = document.querySelector("#search")
 	const input = search.value.toLowerCase()
+	let no_results = 0
 	let i = 0
 
 	// restart
@@ -381,10 +386,10 @@ export const search = () => {
 }
 
 /**
- * Go to advanced tab
+ * Go to Tools tab
  */
 export const createFile = () => {
-	location.replace("/advanced")
+	location.replace("/tools")
 }
 
 export const createPassword = () => {
