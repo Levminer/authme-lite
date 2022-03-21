@@ -361,8 +361,8 @@ export const search = () => {
 
 	// restart
 	for (let i = 0; i < query.length; i++) {
-		const div = document.querySelector(`#container${[i]}`)
-		div.style.display = ""
+		document.querySelector(`#container${[i]}`).style.display = ""
+		document.querySelector(".noResultsFound").style.display = "none"
 	}
 
 	// search algorithm
@@ -372,6 +372,8 @@ export const search = () => {
 		} else {
 			const div = document.querySelector(`#container${[i]}`)
 			div.style.display = "none"
+
+			no_results++
 		}
 		i++
 	})
@@ -382,6 +384,11 @@ export const search = () => {
 			const div = document.querySelector(`#container${[i]}`)
 			div.style.display = ""
 		}
+	}
+
+	if (query.length === no_results) {
+		document.querySelector(".noResultsFound").style.display = "flex"
+		document.querySelector(".searchQuery").textContent = `Not found search results for "${document.querySelector("#search").value}".`
 	}
 }
 
