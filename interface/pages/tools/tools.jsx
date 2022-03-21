@@ -1,8 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
-import { switchMenu, importCodes, openImportCodes, exportCodes } from "."
+import { importMenu, exportMenu, importCodes, openImportCodes, exportCodes } from "."
 
-const Advanced = () => {
+let render = false
+
+const Tools = () => {
+	useEffect(() => {
+		if (render === false) {
+			setTimeout(() => {
+				document.querySelector(".importButton").disabled = true
+			}, 100)
+
+			render = true
+		}
+	}, [])
+
 	return (
 		<>
 			<KeepAlive>
@@ -10,7 +22,7 @@ const Advanced = () => {
 					<div className="mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
 						<h1 className="mb-1 text-gray-50">Tools</h1>
 						<div className="flex flex-row items-center justify-center gap-3">
-							<button className="importButton button" onClick={switchMenu}>
+							<button className="importButton button" onClick={importMenu}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none h-6 w-6" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 									<path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
@@ -18,7 +30,7 @@ const Advanced = () => {
 								</svg>
 								Import
 							</button>
-							<button className="exportButton button" onClick={switchMenu}>
+							<button className="exportButton button" onClick={exportMenu}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none h-6 w-6" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 									<path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
@@ -61,4 +73,4 @@ const Advanced = () => {
 	)
 }
 
-export default Advanced
+export default Tools

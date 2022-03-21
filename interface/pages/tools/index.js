@@ -3,39 +3,30 @@ import { invoke } from "@tauri-apps/api/tauri"
 import FileSaver from "file-saver"
 
 /**
- * Globals
- */
-let menu_state = "import"
-
-/**
  * Switch menu state
  */
-export const switchMenu = () => {
-	if (menu_state === "import") {
-		const imp_div = document.querySelector(".importMenu")
-		const exp_div = document.querySelector(".exportMenu")
-		const exp_but = document.querySelector(".exportButton")
-		const imp_but = document.querySelector(".importButton")
+export const importMenu = () => {
+	const imp_div = document.querySelector(".importMenu")
+	const exp_div = document.querySelector(".exportMenu")
+	const exp_but = document.querySelector(".exportButton")
+	const imp_but = document.querySelector(".importButton")
 
-		imp_div.style.display = "none"
-		exp_div.style.display = "flex"
-		exp_but.disabled = true
-		imp_but.disabled = false
+	imp_div.style.display = "flex"
+	exp_div.style.display = "none"
+	exp_but.disabled = false
+	imp_but.disabled = true
+}
 
-		menu_state = "export"
-	} else {
-		const imp_div = document.querySelector(".importMenu")
-		const exp_div = document.querySelector(".exportMenu")
-		const exp_but = document.querySelector(".exportButton")
-		const imp_but = document.querySelector(".importButton")
+export const exportMenu = () => {
+	const imp_div = document.querySelector(".importMenu")
+	const exp_div = document.querySelector(".exportMenu")
+	const exp_but = document.querySelector(".exportButton")
+	const imp_but = document.querySelector(".importButton")
 
-		imp_div.style.display = "flex"
-		exp_div.style.display = "none"
-		exp_but.disabled = false
-		imp_but.disabled = true
-
-		menu_state = "import"
-	}
+	imp_div.style.display = "none"
+	exp_div.style.display = "flex"
+	exp_but.disabled = true
+	imp_but.disabled = false
 }
 
 /**

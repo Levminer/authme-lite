@@ -151,3 +151,7 @@ input::-ms-clear {
 .toggle:checked {
 	right: 4px !important;
 }
+
+.button:disabled {
+	cursor: not-allowed;
+}
