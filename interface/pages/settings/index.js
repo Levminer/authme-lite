@@ -76,6 +76,7 @@ export const names = () => {
 		tgl0.checked = false
 		tgt0.textContent = "Off"
 		names_state = false
+
 		return console.warn("Codes not saved yet")
 	} else if (storage.settings.names === true) {
 		names_state = true
@@ -104,7 +105,8 @@ export const changeNames = () => {
 		tgl0.checked = false
 		tgt0.textContent = "Off"
 		names_state = false
-		return console.warn("Codes not saved yet")
+
+		return invoke("error", { invokeMessage: "Codes not saved! \n\nGo back to the codes page and save your codes." })
 	}
 
 	if (names_state === false) {
