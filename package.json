@@ -5,7 +5,7 @@
 	"license": "GPL-3.0",
 	"scripts": {
 		"start": "node scripts/alpha-build.js && tauri dev",
-		"dev: ": "tauri dev",
+		"dev": "tauri dev",
 		"build": "tauri build",
 		"build:alpha": "node scripts/alpha-build.js && tauri build && node scripts/alpha-rename.js",
 		"build:release": "node scripts/release-build.js && tauri build && node scripts/release-rename.js",

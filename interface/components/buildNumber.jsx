@@ -9,6 +9,13 @@ const checkBuildNumber = async () => {
 		document.querySelector(".build-content").textContent = `You are running an alpha version of Authme Lite - Version ${version} - Build ${build.number}`
 		document.querySelector(".build").style.display = "flex"
 	}
+
+	if (build.number.startsWith("release")) {
+		const version = await app.getVersion()
+
+		document.querySelector(".build-content").textContent = `You are running a pre-release version of Authme Lite - Version ${version} - Build ${build.number}`
+		document.querySelector(".build").style.display = "flex"
+	}
 }
 
 checkBuildNumber()

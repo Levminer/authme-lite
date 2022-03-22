@@ -5,7 +5,7 @@ let source_map = false
 if (process.env.NODE_ENV !== "production") {
 	source_map = "inline-source-map"
 } else {
-	source_map = "eval"
+	source_map = "cheap-module-source-map"
 }
 
 module.exports = {
