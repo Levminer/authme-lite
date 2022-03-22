@@ -45,7 +45,7 @@ jobs:
       - name: Remove linux appimage folder 
         if: runner.os == 'Linux'
         run: >
-          src-tauri/target/release/bundle/appimage/authme-lite.AppDir
+          rm -rf src-tauri/target/release/bundle/appimage/authme-lite.AppDir
         shell: bash
       - uses: octokit/request-action@v2.x
         id: get_latest_release
@@ -77,7 +77,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./dist/authme-${{steps.version.outputs.prop}}-windows-x64-installer.exe
+          asset_path: ./src-tauri/target/release/authme-${{steps.version.outputs.prop}}-windows-x64-installer.exe
           asset_name: authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.exe
           asset_content_type: application/octet-stream
       - name: Upload the windows portable asset
@@ -87,7 +87,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./dist/authme-${{steps.version.outputs.prop}}-windows-x64-portable.zip
+          asset_path: ./src-tauri/target/release/authme-${{steps.version.outputs.prop}}-windows-x64-portable.zip
           asset_name: authme-lite-${{steps.version.outputs.prop}}-windows-x64-portable.zip
           asset_content_type: application/x-zip-compressed
       # Linux
@@ -98,7 +98,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./dist/authme-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
+          asset_path: ./src-tauri/target/release/authme-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
           asset_name: authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
           asset_content_type: application/octet-stream
       - name: Upload the linux portable asset
@@ -119,7 +119,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./dist/authme-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
+          asset_path: ./src-tauri/target/release/authme-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
           asset_name: authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
           asset_content_type: application/octet-stream
       - name: Upload the mac portable asset
@@ -129,7 +129,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./dist/authme-${{steps.version.outputs.prop}}-mac-x64-portable.zip
+          asset_path: ./src-tauri/target/release/authme-${{steps.version.outputs.prop}}-mac-x64-portable.zip
           asset_name: authme-lite-${{steps.version.outputs.prop}}-mac-x64-portable.zip
           asset_content_type: application/x-zip-compressed
       - name: Upload artifacts
