@@ -30,14 +30,14 @@ jobs:
         if: matrix.NAME == 'linux'
         run: >
           sudo apt-get update
+
           sudo apt-get install -y webkit2gtk-4.0
       - name: Install app dependencies and build it
         run: npm ci && npm run build:alpha
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Get releases
-        uses: octokit/request-action@v2.x
+      - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
           route: GET /repos/:repository/releases?per_page=1
@@ -48,6 +48,7 @@ jobs:
         id: get_upload_url
         run: >
           url=$(echo "$response" | jq -r ".[0].upload_url")
+
           echo "::set-output name=url::$url"
         env:
           response: ${{ steps.get_latest_release.outputs.data }}
@@ -139,7 +140,9 @@ jobs:
       - name: Remove useless folders
         run: >
           rm -rf src-tauri/target/release/build
+
           rm -rf src-tauri/target/release/deps
+          
           rm -rf src-tauri/target/release/bundle
         shell: bash
       - name: Upload artifacts
