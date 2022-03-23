@@ -19,7 +19,7 @@ if (os.platform() === "win32") {
 } else {
 	try {
 		fs.renameSync("./src-tauri/target/release/authme-lite", `./src-tauri/target/release/authme-lite-${version}-linux-x64-portable`)
-		fs.renameSync(`./src-tauri/target/release/bundle/appimage/authme-lite_${version}_amd64.AppImage`, `./src-tauri/target/release/authme-lite-${version}-linux-x64-installer.appimage`)
+		fs.renameSync("./src-tauri/target/release/bundle/appimage/linuxdeploy-x86_64.AppImage", `./src-tauri/target/release/authme-lite-${version}-linux-x64-installer.appimage`)
 	} catch (err) {
 		console.log("File not found")
 	}

@@ -37,39 +37,6 @@ jobs:
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # Windows
-      - name: Upload the windows installer asset
-        if: runner.os == 'Windows'
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.msi
-          asset_name: authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.msi
-          asset_content_type: application/octet-stream
-      # Linux
-      - name: Upload the linux installer asset
-        if: runner.os == 'Linux'
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
-          asset_name: authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
-          asset_content_type: application/octet-stream
-      # Mac
-      - name: Upload the mac installer asset
-        if: runner.os == 'macOS'
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
-          asset_name: authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
-          asset_content_type: application/octet-stream
       - name: Remove useless folders
         run: >
           rm -rf src-tauri/target/release/build
