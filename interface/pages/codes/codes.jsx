@@ -1,10 +1,13 @@
 import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
-import { loadSavedCodes, saveCodes, loadFile, openDialog, createFile, search, createPassword, loadEncryptedSavedCodes } from "."
+import { useNavigate } from "react-router-dom"
+import { loadSavedCodes, saveCodes, loadFile, openDialog, search, createPassword, loadEncryptedSavedCodes } from "."
 
 let render = false
 
 const Codes = () => {
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		if (render === false) {
 			console.log("Authme - Page loaded")
@@ -31,6 +34,13 @@ const Codes = () => {
 			render = true
 		}
 	}, [])
+
+	/**
+	 * Go to Tools tab
+	 */
+	const createFile = () => {
+		navigate("/tools")
+	}
 
 	return (
 		<>

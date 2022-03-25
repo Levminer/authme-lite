@@ -1,6 +1,5 @@
 import React from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-import AliveScope from "react-activation"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import Codes from "./pages/codes/codes.jsx"
 import Tools from "./pages/tools/tools.jsx"
@@ -11,16 +10,14 @@ import AppBar from "./components/appBar.jsx"
 const Router = () => {
 	return (
 		<>
-			<AliveScope>
-				<BrowserRouter>
-					<AppBar />
-					<Switch>
-						<Route exact path="/" component={Codes} />
-						<Route exact path="/tools" component={Tools} />
-						<Route exact path="/settings" component={Settings} />
-					</Switch>
-				</BrowserRouter>
-			</AliveScope>
+			<BrowserRouter>
+				<AppBar />
+				<Routes>
+					<Route exact path="/" element={<Codes />} />
+					<Route exact path="/tools" element={<Tools />} />
+					<Route exact path="/settings" element={<Settings />} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	)
 }

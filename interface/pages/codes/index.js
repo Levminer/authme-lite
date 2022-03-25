@@ -1,8 +1,8 @@
-import speakeasy from "@levminer/speakeasy"
-import { invoke } from "@tauri-apps/api/tauri"
 import { convert } from "../../../libraries/convert"
-import bcrypt from "bcryptjs"
+import { invoke } from "@tauri-apps/api/tauri"
 import SimpleCrypto from "simple-crypto-js"
+import speakeasy from "@levminer/speakeasy"
+import bcrypt from "bcryptjs"
 
 /**
  * Globals
@@ -390,13 +390,6 @@ export const search = () => {
 		document.querySelector(".noResultsFound").style.display = "flex"
 		document.querySelector(".searchQuery").textContent = `Not found search results for "${document.querySelector("#search").value}".`
 	}
-}
-
-/**
- * Go to Tools tab
- */
-export const createFile = () => {
-	location.replace("/tools")
 }
 
 export const createPassword = () => {
