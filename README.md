@@ -2,7 +2,7 @@
 
 -   A lite and simple two-factor authentication app for desktop.
 
-[![Downloads](https://img.shields.io/github/downloads/levminer/authme-lite/total?color=succes&label=Downloads)](https://github.com/Levminer/authme-lite/releases)
+[![Downloads](https://img.shields.io/github/downloads/levminer/authme-lite/total?color=succes&label=Downloads)](https://tooomm.github.io/github-release-stats/?username=Levminer&repository=authme-lite)
 [![Support](https://img.shields.io/badge/Support-PayPal-blue)](https://paypal.me/levminer)
 [![License](https://img.shields.io/github/license/levminer/authme-lite?label=License)](https://github.com/Levminer/authme-lite/blob/main/LICENSE.md)
 
@@ -31,6 +31,8 @@
 ## Features
 
 -   🔎 Lightweight: 3MB on disk, uses 50MB RAM
+-   🔑 Import form 2FA TOTP QR codes
+-   🔒 Secured by your own password
 
 ## Contributing and development
 
