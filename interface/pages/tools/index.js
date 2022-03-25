@@ -8,25 +8,17 @@ import FileSaver from "file-saver"
 export const importMenu = () => {
 	const imp_div = document.querySelector(".importMenu")
 	const exp_div = document.querySelector(".exportMenu")
-	const exp_but = document.querySelector(".exportButton")
-	const imp_but = document.querySelector(".importButton")
 
 	imp_div.style.display = "flex"
 	exp_div.style.display = "none"
-	exp_but.disabled = false
-	imp_but.disabled = true
 }
 
 export const exportMenu = () => {
 	const imp_div = document.querySelector(".importMenu")
 	const exp_div = document.querySelector(".exportMenu")
-	const exp_but = document.querySelector(".exportButton")
-	const imp_but = document.querySelector(".importButton")
 
 	imp_div.style.display = "none"
 	exp_div.style.display = "flex"
-	exp_but.disabled = true
-	imp_but.disabled = false
 }
 
 /**

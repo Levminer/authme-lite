@@ -1,20 +1,8 @@
-import React, { useEffect } from "react"
+import React from "react"
 import KeepAlive from "react-activation"
 import { importMenu, exportMenu, importCodes, openImportCodes, exportCodes } from "."
 
-let render = false
-
 const Tools = () => {
-	useEffect(() => {
-		if (render === false) {
-			setTimeout(() => {
-				document.querySelector(".importButton").disabled = true
-			}, 100)
-
-			render = true
-		}
-	}, [])
-
 	return (
 		<>
 			<KeepAlive>

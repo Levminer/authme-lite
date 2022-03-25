@@ -62,6 +62,7 @@ h5 {
 }
 
 body {
+	font-family: system-ui, Arial, Helvetica, sans-serif;
 	color: white;
 	background-color: rgb(10, 10, 10);
 	overflow-y: scroll !important;
@@ -79,8 +80,9 @@ hr {
 	padding: 0;
 }
 
+/* scrollbar */
 ::-webkit-scrollbar-track {
-	background-color: black;
+	background-color: #000000;
 }
 
 ::-webkit-scrollbar {
@@ -89,11 +91,15 @@ hr {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: rgb(20, 20, 20);
+	background-color: rgb(40, 40, 40);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgb(50, 50, 50);
 }
 
 ::-webkit-scrollbar-corner {
-	background: #292a2d;
+	background-color: #000000;
 }
 
 ::selection {
@@ -150,8 +156,4 @@ input::-ms-clear {
 
 .toggle:checked {
 	right: 4px !important;
-}
-
-.button:disabled {
-	cursor: not-allowed;
 }
