@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 	wm.maximize()
 }
 
-wm.setTitle(`Authme (${version})`)
+wm.setTitle(`Authme Lite (${version})`)
 
 ReactDOM.render(<Router />, document.getElementById("root"))
 

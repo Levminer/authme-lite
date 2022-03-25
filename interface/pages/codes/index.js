@@ -78,6 +78,7 @@ const createElements = (processed) => {
 	sessionStorage.setItem("issuers", JSON.stringify(issuers))
 
 	document.querySelector("#block0").style.display = "none"
+	document.querySelector("#block5").style.display = "none"
 	document.querySelector("#input").style.display = "none"
 
 	const generate = () => {
@@ -132,7 +133,7 @@ const createElements = (processed) => {
 				</div>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center lg:mr-20 lg:ml-20 md:mr-5 md:ml-5">
-				<h2 id="names${i}" tabindex="0" class="text-2xl font-normal text-center w-full relative -top-10 mb-4 py-2 px-5 rounded-2xl bg-gray-600 select-all"></h2>
+				<h2 id="names${i}" tabindex="0" class="md:break-all text-2xl font-normal text-center w-full relative -top-10 mb-4 pt-1 pb-2 px-5 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				<div class="flex flex-col justify-center items-center">
 				<div class="progress">
