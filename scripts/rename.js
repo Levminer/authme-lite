@@ -5,7 +5,7 @@ const { version } = require("../package.json")
 if (os.platform() === "win32") {
 	try {
 		fs.renameSync("./src-tauri/target/release/Authme Lite.exe", `./src-tauri/target/release/authme-lite-${version}-windows-x64-portable.exe`)
-		fs.renameSync(`./src-tauri/target/release/bundle/msi/Authme Lite_${version}_x64.msi`, `./src-tauri/target/release/authme-lite-${version}-windows-x64-installer.msi`)
+		fs.renameSync(`./src-tauri/target/release/bundle/msi/Authme Lite_${version}_x64_en-US.msi`, `./src-tauri/target/release/authme-lite-${version}-windows-x64-installer.msi`)
 	} catch (err) {
 		console.log("File not found")
 	}

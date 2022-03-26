@@ -4,23 +4,23 @@
 
 @layer components {
 	.block-container {
-		@apply flex flex-col justify-center items-center mx-auto w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+		@apply mx-auto mt-10 mb-10 flex w-2/3 flex-col items-center justify-center rounded-2xl bg-gray-800;
 	}
 
-	.ctdiv {
-		@apply container w-2/3 bg-gray-800 mt-10 mb-10 rounded-2xl;
+	.codes-container {
+		@apply container mt-10 mb-10 w-2/3 rounded-2xl bg-gray-800;
 	}
 
 	.buttoni {
-		@apply flex flex-row justify-center items-center mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mb-6 flex w-48 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 
 	.button {
-		@apply flex flex-row justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mt-3 mb-6 flex w-64 transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 
 	.input {
-		@apply flex flex-row text-center justify-center items-center mt-3 mb-6 py-3 px-10 font-medium text-xl bg-white text-black rounded-2xl border-2 hover:bg-transparent hover:text-white duration-200 ease-in transform;
+		@apply mt-3 mb-6 flex transform flex-row items-center justify-center rounded-2xl border-2 bg-white py-3 px-10 text-center text-xl font-medium text-black duration-200 ease-in hover:bg-transparent hover:text-white;
 	}
 }
 
@@ -30,11 +30,11 @@
 	}
 
 	h2 {
-		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+		@apply focus-visible:ring-popup-magenta focus-visible:rounded-2xl focus-visible:ring-4;
 	}
 
 	.link {
-		@apply focus-visible:ring-popup-magenta focus-visible:ring-4 focus-visible:rounded-2xl;
+		@apply focus-visible:ring-popup-magenta focus-visible:rounded-2xl focus-visible:ring-4;
 	}
 }
 
@@ -62,6 +62,7 @@ h5 {
 }
 
 body {
+	font-family: system-ui, Arial, Helvetica, sans-serif;
 	color: white;
 	background-color: rgb(10, 10, 10);
 	overflow-y: scroll !important;
@@ -79,8 +80,9 @@ hr {
 	padding: 0;
 }
 
+/* scrollbar */
 ::-webkit-scrollbar-track {
-	background-color: black;
+	background-color: #000000;
 }
 
 ::-webkit-scrollbar {
@@ -89,11 +91,15 @@ hr {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: rgb(20, 20, 20);
+	background-color: rgb(40, 40, 40);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgb(50, 50, 50);
 }
 
 ::-webkit-scrollbar-corner {
-	background: #292a2d;
+	background-color: #000000;
 }
 
 ::selection {
@@ -116,14 +122,6 @@ hr {
 	height: 100%;
 	background: white;
 	transition: all 0.2s;
-}
-
-.buttoni {
-	width: 12rem !important;
-}
-
-.button {
-	width: 14rem !important;
 }
 
 svg {

@@ -1,8 +1,8 @@
-import speakeasy from "@levminer/speakeasy"
-import { invoke } from "@tauri-apps/api/tauri"
 import { convert } from "../../../libraries/convert"
-import bcrypt from "bcryptjs"
+import { invoke } from "@tauri-apps/api/tauri"
 import SimpleCrypto from "simple-crypto-js"
+import speakeasy from "@levminer/speakeasy"
+import bcrypt from "bcryptjs"
 
 /**
  * Globals
@@ -19,59 +19,36 @@ export const openDialog = () => {
 
 /**
  * Load file from disk
- * @param {Object} file
+ * @param {import("react").SyntheticEvent} event
  */
-export const loadFile = (file) => {
-	file.persist()
+export const loadFile = (event) => {
+	// handle for react
+	event.persist()
 
-	handleFiles(file.target.files)
-}
-
-/**
- * Handle uploaded file
- * @param {Array} files
- */
-const handleFiles = (files) => {
+	// check if file reader supported
 	if (window.FileReader) {
-		convertToText(files[0])
-		console.warn("Authme - File uploaded successfully")
+		const reader = new FileReader()
+
+		// file reader error
+		reader.onerror = () => {
+			if (event.target.error.name == "NotReadableError") {
+				console.warn("Failed to upload the file! You uploaded a corrupted or not supported file")
+			}
+		}
+
+		// file reader successful
+		reader.onload = (file) => {
+			const loaded = JSON.parse(file.target.result)
+			const processed = convert(Buffer.from(loaded.codes, "base64").toString())
+
+			sessionStorage.setItem("text", loaded.codes)
+
+			createElements(processed)
+		}
+
+		reader.readAsText(event.target.files[0])
 	} else {
 		console.warn("Authme - Can't upload file")
-	}
-}
-
-/**
- * Convert to text
- * @param {String} file
- */
-const convertToText = (file) => {
-	const reader = new FileReader()
-	reader.onload = loadHandler
-	reader.onerror = errorHandler
-	reader.readAsText(file)
-}
-
-/**
- * Handle converted text
- * @param {Object} event
- */
-const loadHandler = (event) => {
-	const text = event.target.result
-
-	sessionStorage.setItem("text", text)
-
-	const processed = convert(text)
-
-	createElements(processed)
-}
-
-/**
- * Error loading file
- * @param {Object} event
- */
-const errorHandler = (event) => {
-	if (event.target.error.name == "NotReadableError") {
-		console.warn("Failed to upload the file! You uploaded a corrupted or not supported file")
 	}
 }
 
@@ -101,12 +78,10 @@ const createElements = (processed) => {
 	sessionStorage.setItem("issuers", JSON.stringify(issuers))
 
 	document.querySelector("#block0").style.display = "none"
+	document.querySelector("#block5").style.display = "none"
 	document.querySelector("#input").style.display = "none"
 
 	const generate = () => {
-		// counter
-		let counter = 0
-
 		for (let i = 0; i < names.length; i++) {
 			// create div
 			const element = document.createElement("div")
@@ -158,7 +133,7 @@ const createElements = (processed) => {
 				</div>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center lg:mr-20 lg:ml-20 md:mr-5 md:ml-5">
-				<h2 id="names${i}" tabindex="0" class="text-2xl font-normal text-center w-full relative -top-10 mb-4 py-2 px-5 rounded-2xl bg-gray-600 select-all"></h2>
+				<h2 id="names${i}" tabindex="0" class="md:break-all text-2xl font-normal text-center w-full relative -top-10 mb-4 pt-1 pb-2 px-5 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				<div class="flex flex-col justify-center items-center">
 				<div class="progress">
@@ -176,7 +151,7 @@ const createElements = (processed) => {
 			}
 
 			// set div in html
-			element.classList.add("ctdiv")
+			element.classList.add("codes-container")
 			element.setAttribute("id", `container${i}`)
 			document.querySelector(".next").appendChild(element)
 
@@ -187,26 +162,27 @@ const createElements = (processed) => {
 			}
 
 			// elements
-			const name_text = document.querySelector(`#name${i}`)
-			const code_text = document.querySelector(`#code${i}`)
-			const time_text = document.querySelector(`#time${i}`)
-			const copy_button = document.querySelector(`#copy${i}`)
-			const progress_bar = document.querySelector(`#progress${i}`)
+			const name = document.querySelector(`#name${i}`)
+			const code = document.querySelector(`#code${i}`)
+			const time = document.querySelector(`#time${i}`)
+			const copy = document.querySelector(`#copy${i}`)
+			const progress = document.querySelector(`#progress${i}`)
 
+			// add to search query
 			query.push(issuers[i].toLowerCase())
 
 			// copy code
-			copy_button.addEventListener("click", () => {
-				navigator.clipboard.writeText(code_text.textContent)
+			copy.addEventListener("click", () => {
+				navigator.clipboard.writeText(code.textContent)
 
-				copy_button.innerHTML = `
+				copy.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
                 Copied`
 
 				setTimeout(() => {
-					copy_button.innerHTML = `
+					copy.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
@@ -214,47 +190,40 @@ const createElements = (processed) => {
 				}, 800)
 			})
 
-			// interval0
-			const int0 = setInterval(() => {
+			// generate token
+			const token = speakeasy.totp({
+				secret: secrets[i],
+				encoding: "base32",
+			})
+
+			// remaining time
+			const remaining_time = 30 - Math.floor((new Date(Date.now()).getTime() / 1000.0) % 30)
+
+			// set content
+			name.textContent = issuers[i]
+			code.textContent = token
+			time.textContent = remaining_time
+
+			// refresh codes
+			setInterval(() => {
 				// generate token
 				const token = speakeasy.totp({
 					secret: secrets[i],
 					encoding: "base32",
 				})
 
-				// time
-				const remaining = 30 - Math.floor((new Date().getTime() / 1000.0) % 30)
+				// remaining time
+				const remaining_time = 30 - Math.floor((new Date(Date.now()).getTime() / 1000.0) % 30)
 
-				name_text.textContent = issuers[i]
-				code_text.textContent = token
-				time_text.textContent = remaining
-			}, 100)
-
-			// interval1
-			const int1 = setInterval(() => {
-				// generate token
-				const token = speakeasy.totp({
-					secret: secrets[i],
-					encoding: "base32",
-				})
-
-				// time
-				const remaining_time = 30 - Math.floor((new Date().getTime() / 1000.0) % 30)
-
-				// settting elements
-				name_text.textContent = issuers[i]
-				code_text.textContent = token
-				time_text.textContent = remaining_time
+				// set content
+				name.textContent = issuers[i]
+				code.textContent = token
+				time.textContent = remaining_time
 
 				// progress bar
 				const value = remaining_time * (100 / 30)
-				progress_bar.style.width = `${value}%`
-
-				clearInterval(int0)
+				progress.style.width = `${value}%`
 			}, 500)
-
-			// add one to counter
-			counter++
 		}
 	}
 
@@ -366,12 +335,16 @@ export const loadEncryptedSavedCodes = async () => {
 
 		const decrypted = aes.decrypt(storage.hash)
 
-		const processed = convert(decrypted)
+		const processed = convert(Buffer.from(decrypted, "base64").toString())
 
-		createElements(processed)
+		setTimeout(() => {
+			console.log(processed)
 
-		document.querySelector("#block2").style.display = "none"
-		document.querySelector("#block4").style.display = "none"
+			createElements(processed)
+
+			document.querySelector("#block2").style.display = "none"
+			document.querySelector("#block4").style.display = "none"
+		}, 300)
 	} else {
 		text.style.color = "#A30015"
 		text.textContent = "Passwords don't match! Try again!"
@@ -384,12 +357,13 @@ export const loadEncryptedSavedCodes = async () => {
 export const search = () => {
 	const search = document.querySelector("#search")
 	const input = search.value.toLowerCase()
+	let no_results = 0
 	let i = 0
 
 	// restart
 	for (let i = 0; i < query.length; i++) {
-		const div = document.querySelector(`#container${[i]}`)
-		div.style.display = ""
+		document.querySelector(`#container${[i]}`).style.display = ""
+		document.querySelector(".noResultsFound").style.display = "none"
 	}
 
 	// search algorithm
@@ -399,6 +373,8 @@ export const search = () => {
 		} else {
 			const div = document.querySelector(`#container${[i]}`)
 			div.style.display = "none"
+
+			no_results++
 		}
 		i++
 	})
@@ -410,13 +386,11 @@ export const search = () => {
 			div.style.display = ""
 		}
 	}
-}
 
-/**
- * Go to advanced tab
- */
-export const createFile = () => {
-	location.replace("/advanced")
+	if (query.length === no_results) {
+		document.querySelector(".noResultsFound").style.display = "flex"
+		document.querySelector(".searchQuery").textContent = `Not found search results for "${document.querySelector("#search").value}".`
+	}
 }
 
 export const createPassword = () => {

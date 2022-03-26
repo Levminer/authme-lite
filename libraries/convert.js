@@ -3,14 +3,16 @@ import "./typedef"
 /**
  * Convert codes from plain text to arrays
  * @param {string} text
+ * @param {number} sortNumber
  * @return {LibImportFile} Import file structure
  */
-export const convert = (text) => {
+export const convert = (text, sortNumber) => {
 	const data = []
-	const names = []
-	const secrets = []
+	let names = []
+	let secrets = []
 	const issuers = []
 	const types = []
+
 	let c0 = 0
 	let c1 = 1
 	let c2 = 2
@@ -43,7 +45,13 @@ export const convert = (text) => {
 		if (i == c0) {
 			const names_before = data[i]
 			const names_after = names_before.slice(8)
-			names.push(names_after.trim())
+
+			if (names_after.length > 40) {
+				names.push(`${names_after.trim().slice(0, 40)}...`)
+			} else {
+				names.push(names_after.trim())
+			}
+
 			c0 = c0 + 4
 		}
 
@@ -59,7 +67,13 @@ export const convert = (text) => {
 		if (i == c2) {
 			const issuers_before = data[i]
 			const issuers_after = issuers_before.slice(8)
-			issuers.push(issuers_after.trim())
+
+			if (issuers_after.length > 15) {
+				issuers.push(`${issuers_after.trim().slice(0, 15)}...`)
+			} else {
+				issuers.push(issuers_after.trim())
+			}
+
 			c2 = c2 + 4
 		}
 
@@ -70,6 +84,39 @@ export const convert = (text) => {
 			types.push(types_after.trim())
 			c3 = c3 + 4
 		}
+	}
+
+	const issuers_original = [...issuers]
+
+	const sort = () => {
+		const names_new = []
+		const secrets_new = []
+
+		issuers.forEach((element) => {
+			for (let i = 0; i < issuers_original.length; i++) {
+				if (element === issuers_original[i]) {
+					names_new.push(names[i])
+					secrets_new.push(secrets[i])
+				}
+			}
+		})
+
+		names = names_new
+		secrets = secrets_new
+	}
+
+	if (sortNumber === 1) {
+		issuers.sort((a, b) => {
+			return a.localeCompare(b)
+		})
+
+		sort()
+	} else if (sortNumber === 2) {
+		issuers.sort((a, b) => {
+			return b.localeCompare(a)
+		})
+
+		sort()
 	}
 
 	return {

@@ -1,9 +1,5 @@
 module.exports = {
-	mode: "jit",
-	purge: {
-		enabled: true,
-		content: ["./interface/**/*.jsx", "./resources/**/*.js"],
-	},
+	content: ["./interface/**/*.jsx", "./interface/**/*.js"],
 	theme: {
 		extend: {
 			inset: {

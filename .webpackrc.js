@@ -4,6 +4,8 @@ let source_map = false
 
 if (process.env.NODE_ENV !== "production") {
 	source_map = "inline-source-map"
+} else {
+	source_map = "cheap-module-source-map"
 }
 
 module.exports = {
@@ -17,25 +19,21 @@ module.exports = {
 				test: [/\.js$/, /\.jsx$/],
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader",
+					loader: "swc-loader",
 					options: {
-						presets: [
-							[
-								"@babel/preset-env",
-								{
-									targets: {
-										esmodules: true,
-									},
-								},
-							],
-							"@babel/preset-react",
-						],
+						jsc: {
+							parser: {
+								syntax: "ecmascript",
+								jsx: true,
+							},
+							target: "es2016",
+						},
 					},
 				},
 			},
 			{
-				test: [/\.s[ac]ss$/i, /\.css$/i],
-				use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
+				test: [/\.css$/i],
+				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
 		],
 	},
