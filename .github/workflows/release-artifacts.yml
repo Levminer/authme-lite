@@ -2,7 +2,7 @@ name: Release Artifacts
 on:
   push:
     branches:
-      - main
+      - dev
 jobs:
   test-tauri:
     strategy:
@@ -33,7 +33,7 @@ jobs:
 
           sudo apt-get install -y webkit2gtk-4.0
       - name: Install app dependencies and build it
-        run: npm ci && npm run build:alpha
+        run: npm ci && npm run build:release
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -103,5 +103,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: authme-lite-latest-alpha-${{matrix.NAME}}-x64-installer-portable
+          name: authme-lite-latest-release-${{matrix.NAME}}-x64-installer-portable
           path: src-tauri/target/release
