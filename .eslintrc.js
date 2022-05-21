@@ -38,5 +38,6 @@ module.exports = {
 		"node/no-unpublished-import": ["off"],
 		"react/no-unescaped-entities": ["off"],
 		"promise/always-return": ["off"],
+		"no-unused-vars": ["warn"],
 	},
 }

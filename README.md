@@ -2,7 +2,7 @@
 
 -   A lite and simple two-factor authentication app for desktop.
 
-[![Downloads](https://img.shields.io/github/downloads/levminer/authme-lite/total?color=succes&label=Downloads)]()
+[![Downloads](https://img.shields.io/github/downloads/levminer/authme-lite/total?color=succes&label=Downloads)](https://github.com/Levminer/authme-lite/releases/latest)
 [![Support](https://img.shields.io/badge/Support-PayPal-blue)](https://paypal.me/levminer)
 [![License](https://img.shields.io/github/license/levminer/authme-lite?label=License)](https://github.com/Levminer/authme-lite/blob/main/LICENSE.md)
 
@@ -27,7 +27,7 @@
 
 -   Latest alpha version for advanced users.
 
-[![Latest alpha](https://img.shields.io/github/package-json/v/levminer/authme-lite/dev?label=Alpha&color=blue)](https://github.com/Levminer/authme-lite/actions/workflows/alpha-artifacts.yml)
+[![Latest alpha](https://img.shields.io/github/package-json/v/levminer/authme-lite/dev?label=Alpha&color=blue)](https://tooomm.github.io/github-release-stats/?username=Levminer&repository=authme-lite)
 [![Updated](https://img.shields.io/github/last-commit/levminer/authme-lite/dev?color=yellowgreen&label=Updated)](https://github.com/Levminer/authme-lite/actions/workflows/alpha-artifacts.yml)
 
 ## Contributing and development

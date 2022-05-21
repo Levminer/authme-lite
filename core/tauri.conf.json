@@ -28,13 +28,11 @@
 			"shortDescription": "A lite and simple version of Authme the 2FA app for desktop.",
 			"longDescription": "",
 			"deb": {
-				"depends": [],
-				"useBootstrapper": false
+				"depends": []
 			},
 			"macOS": {
 				"frameworks": [],
 				"minimumSystemVersion": "",
-				"useBootstrapper": false,
 				"exceptionDomain": "",
 				"signingIdentity": null,
 				"entitlements": null

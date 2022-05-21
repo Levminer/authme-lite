@@ -1,5 +1,6 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { AliveScope } from "react-activation"
 
 import Codes from "./pages/codes/codes.jsx"
 import Tools from "./pages/tools/tools.jsx"
@@ -12,11 +13,13 @@ const Router = () => {
 		<>
 			<BrowserRouter>
 				<AppBar />
-				<Routes>
-					<Route exact path="/" element={<Codes />} />
-					<Route exact path="/tools" element={<Tools />} />
-					<Route exact path="/settings" element={<Settings />} />
-				</Routes>
+				<AliveScope>
+					<Routes>
+						<Route exact path="/" element={<Codes />} />
+						<Route exact path="/tools" element={<Tools />} />
+						<Route exact path="/settings" element={<Settings />} />
+					</Routes>
+				</AliveScope>
 			</BrowserRouter>
 		</>
 	)
