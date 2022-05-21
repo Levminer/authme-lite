@@ -2,7 +2,7 @@ name: Release Artifacts
 on:
   push:
     branches:
-      - dev
+      - main
 jobs:
   test-tauri:
     strategy:
