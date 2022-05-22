@@ -34,7 +34,7 @@ interface LibAuthmeFile {
 	role: "codes" | "import" | "export"
 	encrypted: boolean
 	codes: string
-	date: Date
+	date: string
 	version: 3
 }
 

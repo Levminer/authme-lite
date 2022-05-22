@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import KeepAlive from "react-activation"
 import { useNavigate } from "react-router-dom"
-import { loadSavedCodes, saveCodes, loadFile, openDialog, search, createPassword, loadEncryptedSavedCodes } from "."
+import { shell } from "@tauri-apps/api"
+import { loadSavedCodes, saveCodes, openDialog, search, createPassword, loadEncryptedSavedCodes } from "./index.js"
 
 let render = false
 
@@ -43,6 +44,20 @@ const Codes = () => {
 		navigate("/tools")
 	}
 
+	/**
+	 * Open docs
+	 */
+	const help = () => {
+		shell.open("https://docs.authme.levminer.com/#/import")
+	}
+
+	/**
+	 * Download sample file
+	 */
+	const sampleFile = () => {
+		shell.open("https://github.com/Levminer/authme/blob/dev/samples/authme/authme_import_sample.zip?raw=true")
+	}
+
 	return (
 		<>
 			<KeepAlive>
@@ -50,13 +65,11 @@ const Codes = () => {
 					<div className="next mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
 						<h1 className="text-gray-50">Authme Lite</h1>
 						<div className="mx-a flex w-full flex-col justify-center">
-							<input type="file" className="hidden" id="file" onChange={loadFile} accept=".authme" />
-
 							<div className="block-container mx-auto text-center" id="block0">
 								<h3 className="mt-3 mb-3">Import your codes</h3>
 								<h4 className="px-3">Create your import file from your 2FA codes, or if you have an import file choose it.</h4>
 
-								<div className="mt-3 flex flex-row space-x-5">
+								<div className="mt-3 flex gap-3 md:flex-col lg:flex-row">
 									<button type="button" className="button" id="input" onClick={createFile}>
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -77,15 +90,15 @@ const Codes = () => {
 								<h3 className="mt-3 mb-3">Importing files</h3>
 								<h4 className="px-3">Read the import guide or download a sample file to try out Authme Lite.</h4>
 
-								<div className="mt-3 flex flex-row space-x-5">
-									<button type="button" className="button" id="input" onClick={createFile}>
+								<div className="mt-3 flex gap-3 md:flex-col lg:flex-row">
+									<button type="button" className="button" id="input" onClick={help}>
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
 											<path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
 										</svg>
 										Help
 									</button>
 
-									<button type="button" className="button" id="input" onClick={openDialog}>
+									<button type="button" className="button" id="input" onClick={sampleFile}>
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
 											<path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 										</svg>

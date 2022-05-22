@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
+		"jsx": "react",
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"target": "ES2021",
-		"checkJs": false,
+		"checkJs": true,
 		"strictFunctionTypes": true,
 		"resolveJsonModule": true
 	},

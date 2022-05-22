@@ -1,6 +1,6 @@
 import QrcodeDecoder from "qrcode-decoder"
 import { invoke } from "@tauri-apps/api/tauri"
-import FileSaver from "file-saver"
+import { fs, dialog } from "@tauri-apps/api"
 
 /**
  * Switch menu state
@@ -22,27 +22,34 @@ export const exportMenu = () => {
 }
 
 /**
- * Open choose file dialog
- */
-export const openImportCodes = () => {
-	document.getElementById("file").click()
-}
-
-/**
  * Convert images to strings
- * @param {import("react").SyntheticEvent} event
  */
-export const importCodes = async (event) => {
-	event.persist()
+export const importCodes = async () => {
+	const file_paths = await dialog.open({ multiple: true, filters: [{ name: "Image file", extensions: ["jpg", "jpeg", "png", "bmp"] }] })
 
-	const arr = event.target.files
+	if (file_paths === null) {
+		return
+	}
+
+	const arr = []
+
+	for (let i = 0; i < file_paths.length; i++) {
+		const file = await fs.readBinaryFile(file_paths[i])
+
+		const blob = new Blob([file], { type: "application/octet-binary" })
+		const url = URL.createObjectURL(blob)
+
+		arr.push(url)
+	}
+
+	console.log(arr)
+
 	const names = []
 	const secrets = []
 	const issuers = []
 
 	for (let i = 0; i < arr.length; i++) {
-		const element = arr[i]
-		const image = URL.createObjectURL(element)
+		const image = arr[i]
 
 		const processImages = async () => {
 			const qr = new QrcodeDecoder()
@@ -77,7 +84,7 @@ export const importCodes = async (event) => {
 				if (arr.length === i + 1) {
 					invoke("info", { invokeMessage: "QR code(s) found!" })
 
-					setTimeout(() => {
+					setTimeout(async () => {
 						let str = ""
 
 						for (let j = 0; j < names.length; j++) {
@@ -97,8 +104,11 @@ export const importCodes = async (event) => {
 							version: 3,
 						}
 
-						const blob = new Blob([JSON.stringify(save_file, null, "\t")], { type: "text/plain;charset=utf-8" })
-						FileSaver.saveAs(blob, "authme_lite_import.authme")
+						const save_path = await dialog.save({ filters: [{ name: "Authme file", extensions: ["authme"] }] })
+
+						if (save_path !== null) {
+							fs.writeFile({ contents: JSON.stringify(save_file, null, "\t"), path: `${save_path}` }, {})
+						}
 					}, 500)
 				}
 			} else {
@@ -114,12 +124,10 @@ export const importCodes = async (event) => {
 /**
  * Export saved codes
  */
-export const exportCodes = () => {
+export const exportCodes = async () => {
 	const names = JSON.parse(localStorage.getItem("names"))
 	const secrets = JSON.parse(localStorage.getItem("secrets"))
 	const issuers = JSON.parse(localStorage.getItem("issuers"))
-
-	console.log(names)
 
 	if (names === null) {
 		return invoke("error", { invokeMessage: "No save file found!\n\nGo back to the codes page and save your codes!" })
@@ -144,6 +152,9 @@ export const exportCodes = () => {
 		version: 3,
 	}
 
-	const blob = new Blob([JSON.stringify(save_file, null, "\t")])
-	FileSaver.saveAs(blob, "authme_lite_export.authme")
+	const save_path = await dialog.save({ filters: [{ name: "Authme file", extensions: ["authme"] }] })
+
+	if (save_path !== null) {
+		fs.writeFile({ contents: JSON.stringify(save_file, null, "\t"), path: `${save_path}` }, {})
+	}
 }

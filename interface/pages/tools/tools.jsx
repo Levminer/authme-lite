@@ -1,6 +1,6 @@
 import React from "react"
 import KeepAlive from "react-activation"
-import { importMenu, exportMenu, importCodes, openImportCodes, exportCodes } from "."
+import { importMenu, exportMenu, importCodes, exportCodes } from "."
 
 const Tools = () => {
 	return (
@@ -9,7 +9,7 @@ const Tools = () => {
 				<div className="mb-32 flex flex-col items-center justify-center">
 					<div className="mt-40 flex w-1/2 flex-col items-center justify-center rounded-3xl bg-gray-700 pt-16 pb-16">
 						<h1 className="mb-1 text-gray-50">Tools</h1>
-						<div className="flex flex-row items-center justify-center gap-3">
+						<div className="mt-3 flex gap-3 md:flex-col lg:flex-row">
 							<button className="importButton button" onClick={importMenu}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none h-6 w-6" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -30,9 +30,8 @@ const Tools = () => {
 
 						<div className="importMenu block-container mt-1 flex flex-col items-center justify-center">
 							<h3 className="mt-5">Import</h3>
-							<h4 className="mt-1">You can import from 2FA QR codes here.</h4>
-							<input type="file" className="hidden" id="file" onChange={importCodes} accept=".jpg, .jpeg, .png, .bmp" multiple />
-							<button type="button" className="button m-5" id="input" onClick={openImportCodes}>
+							<h4 className="mt-1 text-center">You can import from 2FA QR codes here.</h4>
+							<button type="button" className="button m-5" id="input" onClick={importCodes}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 									<line x1="15" y1="8" x2="15.01" y2="8"></line>

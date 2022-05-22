@@ -7,13 +7,13 @@ import "./styles/index.css"
 
 import Router from "./router.js"
 
-const wm = new window.WindowManager()
+const mainWindow = new window.WindowManager()
 
 if (process.env.NODE_ENV === "production") {
-	wm.maximize()
+	mainWindow.maximize()
 }
 
-wm.setTitle(`Authme Lite (${version})`)
+mainWindow.setTitle(`Authme Lite (${version})`)
 
 ReactDOM.render(<Router />, document.getElementById("root"))
 

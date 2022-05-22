@@ -1,5 +1,6 @@
 import { convert } from "../../../libraries/convert"
 import { invoke } from "@tauri-apps/api/tauri"
+import { fs, dialog } from "@tauri-apps/api"
 import SimpleCrypto from "simple-crypto-js"
 import speakeasy from "@levminer/speakeasy"
 import bcrypt from "bcryptjs"
@@ -13,42 +14,18 @@ const query = []
 /**
  * Open load dialog
  */
-export const openDialog = () => {
-	document.getElementById("file").click()
-}
+export const openDialog = async () => {
+	const file_path = await dialog.open({ filters: [{ name: "Authme file", extensions: ["authme"] }] })
 
-/**
- * Load file from disk
- * @param {import("react").SyntheticEvent} event
- */
-export const loadFile = (event) => {
-	// handle for react
-	event.persist()
+	if (file_path !== null) {
+		const loaded_file = await fs.readTextFile(file_path.toString())
+		const file = JSON.parse(loaded_file)
 
-	// check if file reader supported
-	if (window.FileReader) {
-		const reader = new FileReader()
+		const processed = convert(Buffer.from(file.codes, "base64").toString(), 0)
 
-		// file reader error
-		reader.onerror = () => {
-			if (event.target.error.name == "NotReadableError") {
-				console.warn("Failed to upload the file! You uploaded a corrupted or not supported file")
-			}
-		}
+		sessionStorage.setItem("text", file.codes)
 
-		// file reader successful
-		reader.onload = (file) => {
-			const loaded = JSON.parse(file.target.result)
-			const processed = convert(Buffer.from(loaded.codes, "base64").toString())
-
-			sessionStorage.setItem("text", loaded.codes)
-
-			createElements(processed)
-		}
-
-		reader.readAsText(event.target.files[0])
-	} else {
-		console.warn("Authme - Can't upload file")
+		createElements(processed)
 	}
 }
 
@@ -202,7 +179,7 @@ const createElements = (processed) => {
 			// set content
 			name.textContent = issuers[i]
 			code.textContent = token
-			time.textContent = remaining_time
+			time.textContent = remaining_time.toString()
 
 			// refresh codes
 			setInterval(() => {
@@ -218,7 +195,7 @@ const createElements = (processed) => {
 				// set content
 				name.textContent = issuers[i]
 				code.textContent = token
-				time.textContent = remaining_time
+				time.textContent = remaining_time.toString()
 
 				// progress bar
 				const value = remaining_time * (100 / 30)
@@ -331,11 +308,11 @@ export const loadEncryptedSavedCodes = async () => {
 		text.style.color = "#28A443"
 		text.textContent = "Passwords match! Please wait!"
 
-		const aes = new SimpleCrypto(password_input)
+		const aes = new SimpleCrypto(password_input.toString())
 
 		const decrypted = aes.decrypt(storage.hash)
 
-		const processed = convert(Buffer.from(decrypted, "base64").toString())
+		const processed = convert(Buffer.from(decrypted.toString(), "base64").toString(), 0)
 
 		setTimeout(() => {
 			console.log(processed)
@@ -401,7 +378,7 @@ export const createPassword = () => {
 	 * LocalStorage Storage
 	 * @type{LibStorage}
 	 */
-	const storage = {}
+	let storage
 
 	const encryptCodes = () => {
 		const text = sessionStorage.getItem("text")
