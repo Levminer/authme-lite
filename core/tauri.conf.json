@@ -1,7 +1,7 @@
 {
 	"package": {
 		"productName": "Authme Lite",
-		"version": "0.8.0"
+		"version": "../package.json"
 	},
 	"build": {
 		"distDir": "../static",
@@ -14,13 +14,7 @@
 			"active": true,
 			"targets": "all",
 			"identifier": "Levminer",
-			"icon": [
-				"icons/32x32.png",
-				"icons/128x128.png",
-				"icons/128x128@2x.png",
-				"icons/icon.icns",
-				"icons/icon.ico"
-			],
+			"icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
 			"resources": [],
 			"externalBin": [],
 			"copyright": "GPL-3.0",
@@ -60,7 +54,9 @@
 				"minHeight": 600,
 				"resizable": true,
 				"maximized": true,
-				"fullscreen": false
+				"fullscreen": false,
+				"transparent": true
+				
 			}
 		],
 		"security": {

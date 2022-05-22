@@ -3,11 +3,11 @@
   windows_subsystem = "windows"
 )]
 
-mod password_encryption;
 mod clear_data;
 mod error;
 mod info;
 mod os;
+mod password_encryption;
 mod warning;
 
 fn main() {

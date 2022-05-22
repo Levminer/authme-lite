@@ -1,5 +1,4 @@
 const fs = require("fs")
-const { version } = require("../package.json")
 
 const build = new Date().toISOString().replace("T", "X").replaceAll(":", ".").substring(0, 19).replaceAll("-", ".").slice(2).replaceAll(".", "").replace("X", ".")
 
@@ -23,8 +22,3 @@ if (!fs.existsSync("core/target/release")) {
 
 fs.writeFileSync("build.json", JSON.stringify(file, null, "\t"))
 fs.writeFileSync("core/target/release/build.json", JSON.stringify(file, null, "\t"))
-
-const conf = JSON.parse(fs.readFileSync("core/tauri.conf.json", "utf-8"))
-conf.package.version = version
-
-fs.writeFileSync("core/tauri.conf.json", JSON.stringify(conf, null, "\t"))

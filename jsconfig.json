@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"target": "ES2021",
+		"checkJs": false,
+		"strictFunctionTypes": true,
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules"]
+}
