@@ -55,8 +55,8 @@
 				"resizable": true,
 				"maximized": true,
 				"fullscreen": false,
-				"transparent": true
-				
+				"transparent": true,
+				"decorations": false
 			}
 		],
 		"security": {
