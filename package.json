@@ -5,10 +5,8 @@
 	"license": "GPL-3.0",
 	"scripts": {
 		"start": "node scripts/alpha-build.js && tauri dev",
-		"dev": "tauri dev",
-		"build": "tauri build",
+		"build": "node scripts/release-build.js && tauri build && node scripts/rename.js",
 		"build:alpha": "node scripts/alpha-build.js && tauri build && node scripts/rename.js",
-		"build:release": "node scripts/release-build.js && tauri build && node scripts/rename.js",
 		"build:bundle": "cross-env NODE_ENV=production webpack --config .webpackrc.js",
 		"server": "cross-env NODE_ENV=development webpack serve --config .webpackrc.js",
 		"lint": "eslint --fix .",

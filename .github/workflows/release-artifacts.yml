@@ -33,7 +33,7 @@ jobs:
 
           sudo apt-get install -y webkit2gtk-4.0
       - name: Install app dependencies and build it
-        run: npm ci && npm run build:release
+        run: npm ci && npm run build
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.msi
+          asset_path: ./core/target/release/authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.msi
           asset_name: authme-lite-${{steps.version.outputs.prop}}-windows-x64-installer.msi
           asset_content_type: application/octet-stream
       # Linux
@@ -78,7 +78,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
+          asset_path: ./core/target/release/authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
           asset_name: authme-lite-${{steps.version.outputs.prop}}-linux-x64-installer.appimage
           asset_content_type: application/octet-stream
       # Mac
@@ -89,19 +89,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{steps.get_upload_url.outputs.url}}
-          asset_path: ./src-tauri/target/release/authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
+          asset_path: ./core/target/release/authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
           asset_name: authme-lite-${{steps.version.outputs.prop}}-mac-x64-installer.dmg
           asset_content_type: application/octet-stream
       - name: Remove useless folders
         run: >
-          rm -rf src-tauri/target/release/build
+          rm -rf core/target/release/build
 
-          rm -rf src-tauri/target/release/deps
+          rm -rf core/target/release/deps
           
-          rm -rf src-tauri/target/release/bundle
+          rm -rf core/target/release/bundle
         shell: bash
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: authme-lite-latest-release-${{matrix.NAME}}-x64-installer-portable
-          path: src-tauri/target/release
+          path: core/target/release
