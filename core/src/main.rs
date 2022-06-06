@@ -11,7 +11,7 @@ mod password_encryption;
 mod warning;
 
 use tauri::Manager;
-use window_vibrancy::{apply_blur, apply_mica, apply_vibrancy, NSVisualEffectMaterial};
+use window_vibrancy::{apply_mica, apply_vibrancy, NSVisualEffectMaterial};
 
 fn main() {
   tauri::Builder::default()

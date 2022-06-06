@@ -159,6 +159,6 @@ input::-ms-clear {
 }
 
 .transparent {
-	background: rgba(5, 0, 0, 0.4);
-	backdrop-filter: blur(18.5px);
+	background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(20px) saturate(180%);
 }
