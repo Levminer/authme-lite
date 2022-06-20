@@ -10,7 +10,7 @@ edition = "2018"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-rc", features = [] }
+tauri-build = { version = "1.0.0", features = [] }
 embed-resource = "1.3"
 
 [dependencies]
@@ -21,7 +21,7 @@ sysinfo = "0.20.2"
 window-vibrancy = "0.1.3"
 
   [dependencies.tauri]
-  version = "1.0.0-rc"
+  version = "1.0.0"
   features = ["api-all"]
 
 [features]
