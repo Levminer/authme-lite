@@ -22,8 +22,6 @@ const background = async () => {
 		if (build < "10.0.22000") {
 			document.querySelector("body").style.background = "black"
 		}
-
-		console.log("k")
 	} else {
 		document.querySelector("body").style.background = "black"
 	}

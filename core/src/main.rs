@@ -14,6 +14,8 @@ use tauri::Manager;
 use window_vibrancy::{apply_mica, apply_vibrancy, NSVisualEffectMaterial};
 
 fn main() {
+  let context = tauri::generate_context!();
+
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
       password_encryption::password_encryption,
@@ -41,6 +43,6 @@ fn main() {
 
       Ok(())
     })
-    .run(tauri::generate_context!())
+    .run(context)
     .expect("error while running tauri application");
 }
