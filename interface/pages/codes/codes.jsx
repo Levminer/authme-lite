@@ -67,7 +67,7 @@ const Codes = () => {
 						<div className="mx-a flex w-full flex-col justify-center">
 							<div className="block-container mx-auto text-center" id="block0">
 								<h3 className="mt-3 mb-3">Import your codes</h3>
-								<h4 className="px-3">Create your import file from your 2FA codes, or if you have an import file choose it.</h4>
+								<h4 className="px-3 text-gray-200">Create your import file from your 2FA codes, or if you have an import file choose it.</h4>
 
 								<div className="mt-3 flex gap-3 md:flex-col lg:flex-row">
 									<button type="button" className="button" id="input" onClick={createFile}>
@@ -88,7 +88,7 @@ const Codes = () => {
 
 							<div className="block-container mx-auto text-center" id="block5">
 								<h3 className="mt-3 mb-3">Importing files</h3>
-								<h4 className="px-3">Read the import guide or download a sample file to try out Authme Lite.</h4>
+								<h4 className="px-3 text-gray-200">Read the import guide or download a sample file to try out Authme Lite.</h4>
 
 								<div className="mt-3 flex gap-3 md:flex-col lg:flex-row">
 									<button type="button" className="button" id="input" onClick={help}>
@@ -113,7 +113,7 @@ const Codes = () => {
 
 							<div className="block-container hidden justify-center" id="block2">
 								<h3 className="mt-3 mb-3">Save codes</h3>
-								<h4>Save your code(s) to your computer for future use.</h4>
+								<h4 className="text-gray-200">Save your code(s) to your computer for future use.</h4>
 								<button type="button" className="button" id="save" onClick={saveCodes}>
 									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
 										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -127,7 +127,9 @@ const Codes = () => {
 
 							<div className="block-container hidden justify-center" id="block3">
 								<h3 className="mt-3 mb-3">Create password</h3>
-								<h4 id="text">Create a password to save and encrypt your codes!</h4>
+								<h4 id="text" className="text-gray-200">
+									Create a password to save and encrypt your codes!
+								</h4>
 								<h5 className="-mb-10 mt-5">Password</h5>
 								<input type="password" spellCheck="false" id="password_input0" className="input mt-10 w-3/5" />
 								<h5 className="-mb-10">Confirm password</h5>
@@ -142,7 +144,9 @@ const Codes = () => {
 
 							<div className="block-container hidden justify-center" id="block4">
 								<h3 className="mt-3 mb-3">Confirm password</h3>
-								<h4 id="text2">Please type in a password to continue!</h4>
+								<h4 id="text2" className=" text-gray-200">
+									Please type in a password to continue!
+								</h4>
 								<h5 className="-mb-10 mt-5">Password</h5>
 								<input type="password" spellCheck="false" id="password_input2" className="input mt-10 w-3/5" />
 								<button type="button" className="button" id="save" onClick={loadEncryptedSavedCodes}>
@@ -156,7 +160,7 @@ const Codes = () => {
 							<div className="noResultsFound hidden">
 								<div className="mx-auto mb-8 flex w-2/3 flex-col items-center justify-center rounded-2xl bg-gray-800 p-4">
 									<h3 className="pt-3">No search results found!</h3>
-									<h4 className="searchQuery py-3"></h4>
+									<h4 className="searchQuery py-3 text-gray-200"></h4>
 								</div>
 							</div>
 						</div>

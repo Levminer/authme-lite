@@ -94,15 +94,12 @@ const createElements = (processed) => {
 				element.innerHTML = `
 				<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
 				<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
-				<h1 class="text-3xl font-bold md:mt-3">Name</h1>
 				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center">
-				<h1 class="text-3xl font-bold md:mt-3">Time</h1>
 				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
-				<h1 class="text-3xl font-bold md:mt-3">Code</h1>
 				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				</div>
@@ -375,7 +372,14 @@ export const createPassword = () => {
 	 * LocalStorage Storage
 	 * @type{LibStorage}
 	 */
-	let storage
+	const storage = {
+		hash: null,
+		password: null,
+		require_password: null,
+		settings: {
+			names: null,
+		},
+	}
 
 	const encryptCodes = () => {
 		const text = sessionStorage.getItem("text")
@@ -399,7 +403,12 @@ export const createPassword = () => {
 
 		const hashed = await bcrypt.hash(password_input0.toString(), salt)
 
+		console.log(hashed)
+
 		storage.password = hashed
+
+		console.log(hashed)
+
 		storage.require_password = true
 		storage.settings = { names: false }
 
@@ -423,7 +432,7 @@ export const createPassword = () => {
 
 			hashPasswords()
 		} else {
-			console.warn("Authme - Passwords dont match!")
+			console.warn("Authme - Passwords don't match!")
 
 			text.style.color = "#A30015"
 			text.textContent = "Passwords don't match! Try again!"
