@@ -1,5 +1,6 @@
 import { convert } from "../../../libraries/convert"
 import { invoke } from "@tauri-apps/api/tauri"
+import { fs, dialog } from "@tauri-apps/api"
 import SimpleCrypto from "simple-crypto-js"
 import speakeasy from "@levminer/speakeasy"
 import bcrypt from "bcryptjs"
@@ -13,42 +14,18 @@ const query = []
 /**
  * Open load dialog
  */
-export const openDialog = () => {
-	document.getElementById("file").click()
-}
+export const openDialog = async () => {
+	const file_path = await dialog.open({ filters: [{ name: "Authme file", extensions: ["authme"] }] })
 
-/**
- * Load file from disk
- * @param {import("react").SyntheticEvent} event
- */
-export const loadFile = (event) => {
-	// handle for react
-	event.persist()
+	if (file_path !== null) {
+		const loaded_file = await fs.readTextFile(file_path.toString())
+		const file = JSON.parse(loaded_file)
 
-	// check if file reader supported
-	if (window.FileReader) {
-		const reader = new FileReader()
+		const processed = convert(Buffer.from(file.codes, "base64").toString(), 0)
 
-		// file reader error
-		reader.onerror = () => {
-			if (event.target.error.name == "NotReadableError") {
-				console.warn("Failed to upload the file! You uploaded a corrupted or not supported file")
-			}
-		}
+		sessionStorage.setItem("text", file.codes)
 
-		// file reader successful
-		reader.onload = (file) => {
-			const loaded = JSON.parse(file.target.result)
-			const processed = convert(Buffer.from(loaded.codes, "base64").toString())
-
-			sessionStorage.setItem("text", loaded.codes)
-
-			createElements(processed)
-		}
-
-		reader.readAsText(event.target.files[0])
-	} else {
-		console.warn("Authme - Can't upload file")
+		createElements(processed)
 	}
 }
 
@@ -89,18 +66,15 @@ const createElements = (processed) => {
 			// set div elements
 			if (names_state === false) {
 				element.innerHTML = `
-				<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
+				<div class="flex md:flex-col lg:flex-row mb-14">
 				<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
-				<h1 class="text-3xl font-bold md:mt-3">Name</h1>
-				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal py-2 px-3 rounded-2xl select-all bg-gray-600 mt-8"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center">
-				<h1 class="text-3xl font-bold md:mt-3">Time</h1>
-				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
+				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal py-2 px-3 rounded-2xl bg-gray-600 mt-8"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
-				<h1 class="text-3xl font-bold md:mt-3">Code</h1>
-				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
+				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal py-2 px-3 rounded-2xl bg-gray-600 select-all mt-8"></h2>
 				</div>
 				</div>
 				<div class="flex flex-col justify-center items-center">
@@ -108,7 +82,7 @@ const createElements = (processed) => {
 				<div id="progress${i}" class="progress__fill"></div>
 				<span class="progress__text">0%</span>
 				</div>
-				<button id="copy${i}" class="buttoni">
+				<button id="copy${i}" class="buttoni mb-8">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
 				</svg>
@@ -120,15 +94,12 @@ const createElements = (processed) => {
 				element.innerHTML = `
 				<div class="flex md:flex-col lg:flex-row flex-row mt-8 mb-14">
 				<div class="flex flex-col flex-1 justify-center items-center lg:ml-10">
-				<h1 class="text-3xl font-bold md:mt-3">Name</h1>
 				<h2 id="name${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center">
-				<h1 class="text-3xl font-bold md:mt-3">Time</h1>
 				<h2 id="time${i}" class="w-20 text-center text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600"></h2>
 				</div>
 				<div class="flex flex-col flex-1 justify-center items-center lg:mr-10">
-				<h1 class="text-3xl font-bold md:mt-3">Code</h1>
 				<h2 id="code${i}" tabindex="0" class="text-2xl font-normal mt-3 py-2 px-3 rounded-2xl bg-gray-600 select-all"></h2>
 				</div>
 				</div>
@@ -202,7 +173,7 @@ const createElements = (processed) => {
 			// set content
 			name.textContent = issuers[i]
 			code.textContent = token
-			time.textContent = remaining_time
+			time.textContent = remaining_time.toString()
 
 			// refresh codes
 			setInterval(() => {
@@ -218,7 +189,7 @@ const createElements = (processed) => {
 				// set content
 				name.textContent = issuers[i]
 				code.textContent = token
-				time.textContent = remaining_time
+				time.textContent = remaining_time.toString()
 
 				// progress bar
 				const value = remaining_time * (100 / 30)
@@ -331,11 +302,11 @@ export const loadEncryptedSavedCodes = async () => {
 		text.style.color = "#28A443"
 		text.textContent = "Passwords match! Please wait!"
 
-		const aes = new SimpleCrypto(password_input)
+		const aes = new SimpleCrypto(password_input.toString())
 
 		const decrypted = aes.decrypt(storage.hash)
 
-		const processed = convert(Buffer.from(decrypted, "base64").toString())
+		const processed = convert(Buffer.from(decrypted.toString(), "base64").toString(), 0)
 
 		setTimeout(() => {
 			console.log(processed)
@@ -401,7 +372,14 @@ export const createPassword = () => {
 	 * LocalStorage Storage
 	 * @type{LibStorage}
 	 */
-	const storage = {}
+	const storage = {
+		hash: null,
+		password: null,
+		require_password: null,
+		settings: {
+			names: null,
+		},
+	}
 
 	const encryptCodes = () => {
 		const text = sessionStorage.getItem("text")
@@ -425,7 +403,12 @@ export const createPassword = () => {
 
 		const hashed = await bcrypt.hash(password_input0.toString(), salt)
 
+		console.log(hashed)
+
 		storage.password = hashed
+
+		console.log(hashed)
+
 		storage.require_password = true
 		storage.settings = { names: false }
 
@@ -449,7 +432,7 @@ export const createPassword = () => {
 
 			hashPasswords()
 		} else {
-			console.warn("Authme - Passwords dont match!")
+			console.warn("Authme - Passwords don't match!")
 
 			text.style.color = "#A30015"
 			text.textContent = "Passwords don't match! Try again!"

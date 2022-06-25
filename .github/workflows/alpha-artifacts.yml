@@ -39,14 +39,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove useless folders
         run: >
-          rm -rf src-tauri/target/release/build
+          rm -rf core/target/release/build
 
-          rm -rf src-tauri/target/release/deps
+          rm -rf core/target/release/deps
           
-          rm -rf src-tauri/target/release/bundle
+          rm -rf core/target/release/bundle
         shell: bash
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: authme-lite-latest-alpha-${{matrix.NAME}}-x64-installer-portable
-          path: src-tauri/target/release
+          path: core/target/release

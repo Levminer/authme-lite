@@ -1,5 +1,3 @@
-import "./typedef"
-
 /**
  * Convert codes from plain text to arrays
  * @param {string} text

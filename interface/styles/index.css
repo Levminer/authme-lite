@@ -64,7 +64,7 @@ h5 {
 body {
 	font-family: system-ui, Arial, Helvetica, sans-serif;
 	color: white;
-	background-color: rgb(10, 10, 10);
+
 	overflow-y: scroll !important;
 	user-select: none;
 }
@@ -156,4 +156,9 @@ input::-ms-clear {
 
 .toggle:checked {
 	right: 4px !important;
+}
+
+.transparent {
+	background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(20px) saturate(180%);
 }

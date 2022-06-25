@@ -17,14 +17,14 @@ const file = {
 	date: release_date,
 }
 
-if (!fs.existsSync("src-tauri/target/release")) {
-	fs.mkdirSync("src-tauri/target/release", { recursive: true })
+if (!fs.existsSync("core/target/release")) {
+	fs.mkdirSync("core/target/release", { recursive: true })
 }
 
 fs.writeFileSync("build.json", JSON.stringify(file, null, "\t"))
-fs.writeFileSync("src-tauri/target/release/build.json", JSON.stringify(file, null, "\t"))
+fs.writeFileSync("core/target/release/build.json", JSON.stringify(file, null, "\t"))
 
-const conf = JSON.parse(fs.readFileSync("src-tauri/tauri.conf.json", "utf-8"))
+const conf = JSON.parse(fs.readFileSync("core/tauri.conf.json", "utf-8"))
 conf.package.version = version
 
-fs.writeFileSync("src-tauri/tauri.conf.json", JSON.stringify(conf, null, "\t"))
+fs.writeFileSync("core/tauri.conf.json", JSON.stringify(conf, null, "\t"))

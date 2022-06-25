@@ -1,7 +1,6 @@
 import { app, os } from "@tauri-apps/api"
 import { invoke } from "@tauri-apps/api/tauri"
 import build from "../../../build.json"
-import "../../../libraries/typedef"
 import { UAParser } from "ua-parser-js"
 
 /**

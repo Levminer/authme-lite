@@ -19,7 +19,7 @@ const AppBar = () => {
 		<>
 			<BuildNumber />
 			<UpdatePopup />
-			<header id="header" className="sticky top-0 z-50 bg-gray-900 text-gray-50">
+			<header id="header" className="transparent sticky top-0 z-50 text-gray-50">
 				<div className="lex-shrink-0 container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
 					<nav className="flex flex-wrap items-center justify-center gap-5 text-base md:ml-auto md:mr-auto">
 						{/* codes tab */}
